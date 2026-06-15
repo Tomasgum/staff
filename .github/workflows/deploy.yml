@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   deploy:
     name: Deploy to production
@@ -23,7 +26,7 @@ jobs:
           username: ${{ secrets.FTP_USR }}
           password: ${{ secrets.FTP_PASS }}
           local-dir: ./
-          server-dir: /wp-content/themes/Scaff Theme/
+          server-dir: /home/scaf.tokonet.lt/public_html/wp-content/themes/Scaff Theme/
           exclude: |
             **/.git*
             **/.git*/**
