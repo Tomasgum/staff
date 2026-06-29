@@ -59,11 +59,6 @@
                 </div>
                 <?php endif; ?>
             </div>
-            <?php else: ?>
-            <div class="hero__badge">
-                <span class="hero__badge-num">30</span>
-                <span class="hero__badge-text">Dienų<br>grąžinimas</span>
-            </div>
             <?php endif; ?>
         </div>
     </div>

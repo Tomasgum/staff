@@ -1249,6 +1249,101 @@ h4 { font-size: 1.1rem; }
   border-radius: 3px;
 }
 
+/* ── CONTACT PAGE ────────────────────────────────────────── */
+.contact-page {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 48px;
+  padding: 48px 0 80px;
+}
+@media (max-width: 900px) { .contact-page { grid-template-columns: 1fr; } }
+
+.contact-info-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  position: sticky;
+  top: calc(var(--header-h, 70px) + var(--topbar-h, 40px) + 24px);
+}
+.contact-info-card__title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 24px;
+}
+
+.contact-info-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.contact-info-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.contact-info-list li svg {
+  flex-shrink: 0;
+  color: var(--accent);
+  margin-top: 2px;
+}
+.contact-info-list__label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+.contact-info-list li a,
+.contact-info-list li span {
+  color: var(--text);
+  font-size: 0.95rem;
+}
+.contact-info-list li a:hover { color: var(--accent); }
+
+.contact-social {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.contact-social__label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+.contact-social__links {
+  display: flex;
+  gap: 10px;
+}
+.contact-social__link {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  transition: all 0.2s;
+}
+.contact-social__link:hover {
+  background: rgba(var(--accent-rgb), 0.15);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.contact-page__content { min-width: 0; }
+
 /* ── WP ALIGNMENTS ───────────────────────────────────────── */
 .aligncenter { margin: 0 auto; display: block; }
 .wp-block-image { margin: 2rem 0; }
