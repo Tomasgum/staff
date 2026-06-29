@@ -26,10 +26,7 @@ function scaff_strip_builder_shortcodes($content) {
 }
 add_filter('woocommerce_short_description', 'scaff_strip_builder_shortcodes', 5);
 add_filter('the_content', function($content) {
-    if (is_singular('product')) {
-        return scaff_strip_builder_shortcodes($content);
-    }
-    return $content;
+    return scaff_strip_builder_shortcodes($content);
 }, 5);
 
 // Remove price
