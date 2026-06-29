@@ -32,7 +32,7 @@ add_action('after_setup_theme', 'scaff_setup');
 
 function scaff_enqueue() {
     wp_enqueue_style('scaff-google-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@400;600;700;800;900&display=swap', [], null);
-    wp_enqueue_style('scaff-main', SCAFF_URI . '/assets/css/main.css', [], filemtime(SCAFF_DIR . '/assets/css/main.css'));
+    wp_enqueue_style('scaff-main', SCAFF_URI . '/assets/css/main.css', [], time());
 
     if (is_woocommerce() || is_cart() || is_checkout()) {
         // Load after WooCommerce's own layout CSS so our overrides win without relying on !important
