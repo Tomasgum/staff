@@ -48,54 +48,77 @@
   color: var(--white);
 }
 
-/* ── TOOLBAR ─────────────────────────────────────────────── */
+/* ── CATEGORY PILLS ──────────────────────────────────────── */
+.shop-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.shop-categories__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.shop-categories__pill:hover {
+  border-color: var(--accent);
+  color: var(--white);
+}
+.shop-categories__pill.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.shop-categories__count {
+  font-size: 0.72rem;
+  opacity: 0.7;
+}
 
-/* Override WooCommerce's float-based toolbar with flexbox */
-.woocommerce .woocommerce-ordering,
-.woocommerce p.woocommerce-result-count {
+/* ── TOOLBAR ─────────────────────────────────────────────── */
+.shop-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 28px;
+}
+.shop-toolbar p.woocommerce-result-count,
+.shop-toolbar form.woocommerce-ordering {
   float: none !important;
   margin: 0 !important;
 }
-
-/* Wrap toolbar in flexbox (WooCommerce outputs result-count + ordering as siblings) */
-.woocommerce .woocommerce-result-count ~ .woocommerce-ordering,
-.woocommerce .woocommerce-ordering {
-  display: inline-block;
-}
-
-/* Toolbar flex row */
-.woo-inner > p.woocommerce-result-count,
-.woo-inner > form.woocommerce-ordering {
-  display: inline-block;
-}
-
-/* Flex wrapper alternative: use a pseudo-container if needed */
 .woocommerce .woocommerce-result-count {
-  display: inline-block;
   font-size: 0.85rem;
   color: var(--text-muted);
-  line-height: 42px;
 }
-
 .woocommerce .woocommerce-ordering select,
 .woocommerce-page .woocommerce-ordering select {
-  background: var(--surface);
+  background: var(--dark);
   border: 1px solid var(--border);
   color: var(--text);
   border-radius: var(--radius-sm);
-  padding: 10px 36px 10px 14px;
-  font-size: 0.875rem;
+  padding: 8px 32px 8px 14px;
+  font-size: 0.85rem;
   -webkit-appearance: none;
+  cursor: pointer;
 }
-
-/* Toolbar row — result count left, ordering right */
-.woo-inner > p.woocommerce-result-count + form.woocommerce-ordering {
-  float: right !important;
+.woocommerce .woocommerce-ordering select:focus,
+.woocommerce-page .woocommerce-ordering select:focus {
+  outline: none;
+  border-color: var(--accent);
 }
-.woo-inner > p.woocommerce-result-count {
-  float: left !important;
-}
-.woo-inner > ul.products { clear: both; }
 
 /* ── PRODUCT LOOP ────────────────────────────────────────── */
 
@@ -170,6 +193,16 @@
   transition: transform 0.5s var(--ease-out);
 }
 .woocommerce ul.products li.product:hover .product-card__image-wrap img { transform: scale(1.04); }
+
+.woocommerce ul.products li.product .product-card__cat-tag {
+  margin: 14px 18px 0;
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
 
 .woocommerce ul.products li.product .woocommerce-loop-product__title {
   padding: 16px 18px 0 !important;

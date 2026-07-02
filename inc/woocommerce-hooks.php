@@ -109,9 +109,48 @@ function scaff_loop_product_thumbnail() {
 remove_action('woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10);
 add_action('woocommerce_before_shop_loop_item_title', 'scaff_loop_product_thumbnail', 10);
 
+// Category tag on each product card
+add_action('woocommerce_before_shop_loop_item_title', function() {
+    global $product;
+    $terms = get_the_terms($product->get_id(), 'product_cat');
+    if ($terms && !is_wp_error($terms)) {
+        echo '<div class="product-card__cat-tag">' . esc_html(reset($terms)->name) . '</div>';
+    }
+}, 15);
+
 // Columns
 add_filter('loop_shop_columns', function() { return 4; });
 add_filter('loop_shop_per_page', function() { return 12; });
+
+// Category filter pills above the product grid
+add_action('woocommerce_before_shop_loop', function() {
+    $terms = get_terms([
+        'taxonomy'   => 'product_cat',
+        'hide_empty' => true,
+        'parent'     => 0,
+        'orderby'    => 'name',
+    ]);
+    if (empty($terms) || is_wp_error($terms)) return;
+
+    $current     = get_queried_object();
+    $current_slug = ($current instanceof WP_Term && $current->taxonomy === 'product_cat') ? $current->slug : '';
+
+    echo '<div class="shop-categories">';
+    echo '<a href="' . esc_url(get_permalink(wc_get_page_id('shop'))) . '" class="shop-categories__pill' . (!$current_slug ? ' is-active' : '') . '">Visi produktai</a>';
+    foreach ($terms as $term) {
+        $active = $current_slug === $term->slug ? ' is-active' : '';
+        echo '<a href="' . esc_url(get_term_link($term)) . '" class="shop-categories__pill' . $active . '">' . esc_html($term->name) . ' <span class="shop-categories__count">' . $term->count . '</span></a>';
+    }
+    echo '</div>';
+}, 5);
+
+// Wrap result-count + ordering in a toolbar div
+add_action('woocommerce_before_shop_loop', function() {
+    echo '<div class="shop-toolbar">';
+}, 18);
+add_action('woocommerce_before_shop_loop', function() {
+    echo '</div>';
+}, 35);
 
 // Remove subcategory injection from the product loop.
 // WooCommerce adds this filter inside its init() method hooked at priority 0,
