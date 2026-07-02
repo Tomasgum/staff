@@ -60,24 +60,6 @@
                         </div>
                     </div>
 
-                    <!-- WIDGET COL 1 -->
-                    <div class="footer-col">
-                        <?php if (is_active_sidebar('footer-1')): ?>
-                            <?php dynamic_sidebar('footer-1'); ?>
-                        <?php else: ?>
-                            <h4 class="footer-widget__title">Katalogas</h4>
-                            <?php
-                            wp_nav_menu([
-                                'theme_location' => 'footer',
-                                'menu_class'     => 'footer-nav__list',
-                                'container'      => false,
-                                'depth'          => 1,
-                                'fallback_cb'    => false,
-                            ]);
-                            ?>
-                        <?php endif; ?>
-                    </div>
-
                     <!-- WIDGET COL 2 -->
                     <div class="footer-col">
                         <?php if (is_active_sidebar('footer-2')): ?>
