@@ -482,19 +482,20 @@
   border-top: 1px solid var(--border);
 }
 .woocommerce div.product .woocommerce-tabs ul.tabs {
-  display: flex;
+  display: flex !important;
   gap: 0;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border) !important;
   margin-bottom: 32px;
-  padding: 0;
-  background: none;
+  padding: 0 !important;
+  background: none !important;
 }
 .woocommerce div.product .woocommerce-tabs ul.tabs li {
-  background: none;
-  border: none;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
-  padding: 0;
+  background: none !important;
+  border: none !important;
+  border-bottom: 2px solid transparent !important;
+  border-radius: 0 !important;
+  margin: 0 0 -1px 0 !important;
+  padding: 0 !important;
 }
 .woocommerce div.product .woocommerce-tabs ul.tabs li a {
   padding: 12px 24px;
@@ -503,20 +504,26 @@
   color: var(--text-muted);
   display: block;
   transition: color 0.2s;
+  background: none !important;
 }
 .woocommerce div.product .woocommerce-tabs ul.tabs li.active {
-  border-bottom-color: var(--accent);
+  border-bottom-color: var(--accent) !important;
+  background: none !important;
 }
-.woocommerce div.product .woocommerce-tabs ul.tabs li.active a { color: var(--white); }
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active a {
+  color: var(--white);
+  background: none !important;
+}
 .woocommerce div.product .woocommerce-tabs ul.tabs li a:hover { color: var(--white); }
 .woocommerce div.product .woocommerce-tabs .panel {
-  background: none;
+  background: none !important;
   color: rgba(255,255,255,0.7);
   line-height: 1.8;
+  border: none !important;
 }
 .woocommerce div.product .woocommerce-tabs .panel h2 { display: none; }
 .woocommerce div.product .woocommerce-tabs ul.tabs li::before,
-.woocommerce div.product .woocommerce-tabs ul.tabs li::after { display: none !important; }
+.woocommerce div.product .woocommerce-tabs ul.tabs li::after { display: none !important; content: none !important; }
 .woocommerce div.product .woocommerce-tabs ul.tabs::before { display: none !important; }
 
 /* Related products */
