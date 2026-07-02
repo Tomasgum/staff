@@ -24,6 +24,7 @@
     initMobileMenu();
     initSmoothLinks();
     initProductCardHover();
+    initContactForm();
   });
 
 
@@ -487,6 +488,50 @@
       card.addEventListener('mouseleave', () => {
         gsap.to(arrow, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.5)' });
       });
+    });
+  }
+
+
+  // ════════════════════════════════════════════════════════════
+  // CONTACT FORM
+  // ════════════════════════════════════════════════════════════
+  function initContactForm() {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+
+    const msgEl = document.getElementById('contact-form-msg');
+    const btn   = form.querySelector('[type="submit"]');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      btn.disabled = true;
+      btn.textContent = 'Siunčiama...';
+      msgEl.className = 'contact-form__msg';
+      msgEl.textContent = '';
+
+      const data = new FormData(form);
+      data.append('action', 'scaff_contact');
+      data.append('nonce', (typeof scaffData !== 'undefined') ? scaffData.nonce : '');
+
+      try {
+        const res  = await fetch((typeof scaffData !== 'undefined') ? scaffData.ajaxUrl : '/wp-admin/admin-ajax.php', {
+          method: 'POST',
+          body: data,
+        });
+        const json = await res.json();
+
+        msgEl.textContent = json.data?.message ?? '';
+        msgEl.className   = 'contact-form__msg ' + (json.success ? 'is-success' : 'is-error');
+
+        if (json.success) form.reset();
+      } catch {
+        msgEl.textContent = 'Ryšio klaida. Prašome bandyti dar kartą.';
+        msgEl.className   = 'contact-form__msg is-error';
+      }
+
+      btn.disabled    = false;
+      btn.innerHTML   = 'Siųsti žinutę <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
     });
   }
 

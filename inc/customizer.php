@@ -78,16 +78,21 @@ function scaff_customizer_register($wp_customize) {
         scaff_add_setting($wp_customize, "scaff_usp_{$i}_text", $usp_defaults[$i]['text'], 'scaff_usp', 'textarea');
     }
 
-    // ── CONTACT ──────────────────────────────────────────────────────────────
+    // ── KONTAKTAI ─────────────────────────────────────────────────────────────
     $wp_customize->add_section('scaff_contact', [
-        'title'    => __('Contact Info', 'scaff'),
+        'title'    => __('Kontaktai', 'scaff'),
         'priority' => 35,
     ]);
 
-    scaff_add_setting($wp_customize, 'scaff_contact_address', 'Vilnius, Lietuva', 'scaff_contact', 'text');
+    scaff_add_setting($wp_customize, 'scaff_contact_form_title', 'Parašykite mums', 'scaff_contact', 'text');
+    scaff_add_setting($wp_customize, 'scaff_contact_form_subtitle', 'Atsakysime per 1 darbo dieną.', 'scaff_contact', 'text');
     scaff_add_setting($wp_customize, 'scaff_contact_phone', '+370 678 34 889', 'scaff_contact', 'text');
     scaff_add_setting($wp_customize, 'scaff_contact_email', 'info@scaffshop.lt', 'scaff_contact', 'text');
+    scaff_add_setting($wp_customize, 'scaff_contact_address', 'Vilnius, Lietuva', 'scaff_contact', 'text');
     scaff_add_setting($wp_customize, 'scaff_contact_hours', 'I – V: 8:00 – 17:00', 'scaff_contact', 'text');
+    scaff_add_setting($wp_customize, 'scaff_footer_fb_url', '', 'scaff_contact', 'url');
+    scaff_add_setting($wp_customize, 'scaff_footer_ig_url', '', 'scaff_contact', 'url');
+    scaff_add_setting($wp_customize, 'scaff_footer_li_url', '', 'scaff_contact', 'url');
 
     // ── FOOTER ───────────────────────────────────────────────────────────────
     $wp_customize->add_section('scaff_footer', [
@@ -97,9 +102,6 @@ function scaff_customizer_register($wp_customize) {
 
     scaff_add_setting($wp_customize, 'scaff_footer_tagline', 'Pastolių įrankiai ir darbo aukštyje įranga profesionalams.', 'scaff_footer', 'textarea');
     scaff_add_setting($wp_customize, 'scaff_footer_copyright', '© 2024 ScaffShop. Visos teisės saugomos.', 'scaff_footer', 'text');
-    scaff_add_setting($wp_customize, 'scaff_footer_fb_url', '', 'scaff_footer', 'url');
-    scaff_add_setting($wp_customize, 'scaff_footer_ig_url', '', 'scaff_footer', 'url');
-    scaff_add_setting($wp_customize, 'scaff_footer_li_url', '', 'scaff_footer', 'url');
 
     // ── COLORS ───────────────────────────────────────────────────────────────
     $wp_customize->add_section('scaff_colors', [

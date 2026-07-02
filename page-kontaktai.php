@@ -88,7 +88,36 @@
         </div>
 
         <div class="contact-page__content">
-            <?php the_content(); ?>
+            <div class="contact-form-wrap">
+                <h2 class="contact-form-wrap__title"><?php echo esc_html(scaff_get('scaff_contact_form_title', 'Parašykite mums')); ?></h2>
+                <p class="contact-form-wrap__subtitle"><?php echo esc_html(scaff_get('scaff_contact_form_subtitle', 'Atsakysime per 1 darbo dieną.')); ?></p>
+
+                <form id="contact-form" class="contact-form" novalidate>
+                    <div class="contact-form__row">
+                        <div class="contact-form__field">
+                            <label for="contact_name">Vardas <span aria-hidden="true">*</span></label>
+                            <input type="text" id="contact_name" name="contact_name" placeholder="Jūsų vardas" required>
+                        </div>
+                        <div class="contact-form__field">
+                            <label for="contact_phone">Telefonas</label>
+                            <input type="tel" id="contact_phone" name="contact_phone" placeholder="+370 6xx xxxxx">
+                        </div>
+                    </div>
+                    <div class="contact-form__field">
+                        <label for="contact_email">El. paštas <span aria-hidden="true">*</span></label>
+                        <input type="email" id="contact_email" name="contact_email" placeholder="jusu@email.lt" required>
+                    </div>
+                    <div class="contact-form__field">
+                        <label for="contact_message">Žinutė <span aria-hidden="true">*</span></label>
+                        <textarea id="contact_message" name="contact_message" rows="6" placeholder="Parašykite savo klausimą ar užklausą..." required></textarea>
+                    </div>
+                    <div id="contact-form-msg" class="contact-form__msg" aria-live="polite"></div>
+                    <button type="submit" class="btn btn--primary btn--lg contact-form__submit">
+                        Siųsti žinutę
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    </button>
+                </form>
+            </div>
         </div>
 
     </div>

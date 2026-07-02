@@ -82,6 +82,7 @@ add_action('widgets_init', 'scaff_widgets_init');
 
 require_once SCAFF_DIR . '/inc/customizer.php';
 require_once SCAFF_DIR . '/inc/woocommerce-hooks.php';
+require_once SCAFF_DIR . '/inc/contact-form.php';
 
 function scaff_remove_woo_breadcrumbs() {
     remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
