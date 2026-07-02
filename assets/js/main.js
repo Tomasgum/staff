@@ -25,6 +25,7 @@
     initSmoothLinks();
     initProductCardHover();
     initContactForm();
+    initShopCats();
   });
 
 
@@ -491,6 +492,40 @@
     });
   }
 
+
+  // ════════════════════════════════════════════════════════════
+  // SHOP CATEGORY SCROLL
+  // ════════════════════════════════════════════════════════════
+  function initShopCats() {
+    const wrap = document.querySelector('.shop-cats-wrap');
+    if (!wrap) return;
+
+    const nav  = wrap.querySelector('.shop-cats');
+    const prev = wrap.querySelector('.shop-cats-arrow--prev');
+    const next = wrap.querySelector('.shop-cats-arrow--next');
+    if (!nav) return;
+
+    const STEP = 220;
+
+    const update = () => {
+      const canLeft  = nav.scrollLeft > 4;
+      const canRight = nav.scrollLeft < nav.scrollWidth - nav.clientWidth - 4;
+      wrap.classList.toggle('can-scroll-left',  canLeft);
+      wrap.classList.toggle('can-scroll-right', canRight);
+      if (prev) prev.toggleAttribute('disabled', !canLeft);
+      if (next) next.toggleAttribute('disabled', !canRight);
+    };
+
+    prev?.addEventListener('click', () => { nav.scrollBy({ left: -STEP, behavior: 'smooth' }); });
+    next?.addEventListener('click', () => { nav.scrollBy({ left:  STEP, behavior: 'smooth' }); });
+    nav.addEventListener('scroll', update, { passive: true });
+
+    // Scroll active tab into view
+    const active = nav.querySelector('.is-active');
+    if (active) active.scrollIntoView({ block: 'nearest', inline: 'center' });
+
+    update();
+  }
 
   // ════════════════════════════════════════════════════════════
   // CONTACT FORM

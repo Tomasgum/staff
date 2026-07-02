@@ -138,6 +138,8 @@ add_action('woocommerce_before_shop_loop', function() {
     $current      = get_queried_object();
     $current_slug = ($current instanceof WP_Term && $current->taxonomy === 'product_cat') ? $current->slug : '';
 
+    echo '<div class="shop-cats-wrap">';
+    echo '<button class="shop-cats-arrow shop-cats-arrow--prev" aria-label="Ankstesnės" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>';
     echo '<nav class="shop-cats" aria-label="Kategorijos">';
     echo '<a href="' . esc_url(get_permalink(wc_get_page_id('shop'))) . '" class="shop-cats__tab' . (!$current_slug ? ' is-active' : '') . '">Visi</a>';
     foreach ($terms as $term) {
@@ -145,6 +147,8 @@ add_action('woocommerce_before_shop_loop', function() {
         echo '<a href="' . esc_url(get_term_link($term)) . '" class="shop-cats__tab' . $active . '">' . esc_html($term->name) . '</a>';
     }
     echo '</nav>';
+    echo '<button class="shop-cats-arrow shop-cats-arrow--next" aria-label="Kitos"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>';
+    echo '</div>';
 }, 5);
 
 // Wrap result-count + ordering in a toolbar div
