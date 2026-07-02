@@ -523,6 +523,12 @@ h4 { font-size: 1.1rem; }
 }
 
 .hero__content { max-width: 680px; }
+.hero__container--full {
+  grid-template-columns: 1fr;
+}
+.hero__container--full .hero__content {
+  max-width: 860px;
+}
 .hero__eyebrow {
   display: inline-flex;
   align-items: center;

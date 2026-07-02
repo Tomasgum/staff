@@ -6,7 +6,15 @@
     <div class="hero__bg" style="background-image:url('<?php echo esc_url($hero_img); ?>')"></div>
     <?php endif; ?>
     <div class="hero__overlay"></div>
-    <div class="container hero__container">
+    <?php
+    $hero_slides = [];
+    for ($i = 1; $i <= 5; $i++) {
+        $url = scaff_get("scaff_hero_slide_{$i}");
+        if ($url) $hero_slides[] = $url;
+    }
+    $has_visual = !empty($hero_slides);
+    ?>
+    <div class="container hero__container<?php echo $has_visual ? '' : ' hero__container--full'; ?>">
         <div class="hero__content">
             <span class="hero__eyebrow" data-gsap="eyebrow"><?php echo esc_html(scaff_get('scaff_hero_eyebrow', 'PROFESIONALŲ PASIRINKIMAS')); ?></span>
             <h1 class="hero__title" data-gsap="title"><?php echo esc_html(scaff_get('scaff_hero_title', 'Pastolių įrankiai ir darbo aukštyje įranga')); ?></h1>
@@ -26,15 +34,8 @@
             </div>
         </div>
 
+        <?php if ($has_visual): ?>
         <div class="hero__visual" data-gsap="visual">
-            <?php
-            $hero_slides = [];
-            for ($i = 1; $i <= 5; $i++) {
-                $url = scaff_get("scaff_hero_slide_{$i}");
-                if ($url) $hero_slides[] = $url;
-            }
-            ?>
-            <?php if (!empty($hero_slides)): ?>
             <div class="hero-slider" data-hero-slider>
                 <div class="hero-slider__track">
                     <?php foreach ($hero_slides as $i => $slide): ?>
@@ -59,8 +60,8 @@
                 </div>
                 <?php endif; ?>
             </div>
-            <?php endif; ?>
         </div>
+        <?php endif; ?>
     </div>
 
     <div class="hero__scroll-indicator" aria-hidden="true">
