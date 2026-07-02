@@ -122,26 +122,29 @@ add_action('woocommerce_before_shop_loop_item_title', function() {
 add_filter('loop_shop_columns', function() { return 4; });
 add_filter('loop_shop_per_page', function() { return 12; });
 
-// Category filter pills above the product grid
+// Category filter tab bar above the product grid
 add_action('woocommerce_before_shop_loop', function() {
     $terms = get_terms([
         'taxonomy'   => 'product_cat',
         'hide_empty' => true,
         'parent'     => 0,
-        'orderby'    => 'name',
+        'orderby'    => 'count',
+        'order'      => 'DESC',
+        'number'     => 10,
+        'exclude'    => get_option('default_product_cat'),
     ]);
     if (empty($terms) || is_wp_error($terms)) return;
 
-    $current     = get_queried_object();
+    $current      = get_queried_object();
     $current_slug = ($current instanceof WP_Term && $current->taxonomy === 'product_cat') ? $current->slug : '';
 
-    echo '<div class="shop-categories">';
-    echo '<a href="' . esc_url(get_permalink(wc_get_page_id('shop'))) . '" class="shop-categories__pill' . (!$current_slug ? ' is-active' : '') . '">Visi produktai</a>';
+    echo '<nav class="shop-cats" aria-label="Kategorijos">';
+    echo '<a href="' . esc_url(get_permalink(wc_get_page_id('shop'))) . '" class="shop-cats__tab' . (!$current_slug ? ' is-active' : '') . '">Visi</a>';
     foreach ($terms as $term) {
         $active = $current_slug === $term->slug ? ' is-active' : '';
-        echo '<a href="' . esc_url(get_term_link($term)) . '" class="shop-categories__pill' . $active . '">' . esc_html($term->name) . ' <span class="shop-categories__count">' . $term->count . '</span></a>';
+        echo '<a href="' . esc_url(get_term_link($term)) . '" class="shop-cats__tab' . $active . '">' . esc_html($term->name) . '</a>';
     }
-    echo '</div>';
+    echo '</nav>';
 }, 5);
 
 // Wrap result-count + ordering in a toolbar div
