@@ -97,6 +97,35 @@ function scaff_woo_page_title($title) {
 }
 add_filter('woocommerce_page_title', 'scaff_woo_page_title');
 
+// Rename the Shop page to "Katalogas" everywhere its title is pulled from —
+// nav menu links and the browser tab/document title.
+add_filter('the_title', function($title, $post_id = null) {
+    $shop_id = wc_get_page_id('shop');
+    if ($shop_id && (int) $post_id === $shop_id && !is_admin()) {
+        return 'Katalogas';
+    }
+    return $title;
+}, 10, 2);
+
+add_filter('wp_nav_menu_objects', function($items) {
+    $shop_url = wc_get_page_permalink('shop');
+    if (!$shop_url) return $items;
+    foreach ($items as $item) {
+        if (untrailingslashit($item->url) === untrailingslashit($shop_url)) {
+            $item->title = 'Katalogas';
+        }
+    }
+    return $items;
+});
+
+add_filter('document_title_parts', function($parts) {
+    $shop_id = wc_get_page_id('shop');
+    if ($shop_id && is_shop() && get_queried_object_id() === $shop_id) {
+        $parts['title'] = 'Katalogas';
+    }
+    return $parts;
+});
+
 // Remove sidebar
 remove_action('woocommerce_sidebar', 'woocommerce_get_sidebar', 10);
 

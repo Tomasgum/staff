@@ -18,10 +18,6 @@
                 <span class="topbar__promo"><?php echo esc_html(scaff_get('scaff_topbar_text', 'DĖL ĮMONĖMS SKIRTOS KAINODAROS SUSISIEKITE')); ?></span>
             </div>
             <div class="topbar__right">
-                <div class="topbar__hours">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    <?php echo esc_html(scaff_get('scaff_topbar_hours', 'I – V 8:00 – 17:00')); ?>
-                </div>
                 <a href="tel:<?php echo esc_attr(preg_replace('/\s+/', '', scaff_get('scaff_topbar_phone', '+37067834889'))); ?>" class="topbar__phone">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.04a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92l-.08 2z"/></svg>
                     <?php echo esc_html(scaff_get('scaff_topbar_phone', '+370 678 34 889')); ?>
@@ -67,9 +63,6 @@
                 <?php if (class_exists('WooCommerce')): ?>
                 <a href="<?php echo esc_url(wc_get_cart_url()); ?>" class="header-cart" aria-label="Cart">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
-                    <?php if (WC()->cart && WC()->cart->get_cart_contents_count() > 0): ?>
-                        <span class="header-cart__count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
-                    <?php endif; ?>
                 </a>
                 <?php endif; ?>
 

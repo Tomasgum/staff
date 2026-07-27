@@ -9,7 +9,6 @@ function scaff_customizer_register($wp_customize) {
     ]);
 
     scaff_add_setting($wp_customize, 'scaff_topbar_text', 'DĖL ĮMONĖMS SKIRTOS KAINODAROS SUSISIEKITE', 'scaff_topbar', 'text');
-    scaff_add_setting($wp_customize, 'scaff_topbar_hours', 'I – V 8:00 – 17:00', 'scaff_topbar', 'text');
     scaff_add_setting($wp_customize, 'scaff_topbar_phone', '+370 678 34 889', 'scaff_topbar', 'text');
     scaff_add_setting($wp_customize, 'scaff_topbar_email', 'info@scaffshop.lt', 'scaff_topbar', 'text');
 

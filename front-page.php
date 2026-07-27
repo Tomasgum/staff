@@ -253,6 +253,64 @@ if (class_exists('WooCommerce')) {
     </div>
 </section>
 
+<!-- NEWS -->
+<?php
+$news_posts = get_posts([
+    'post_type'      => 'post',
+    'post_status'    => 'publish',
+    'posts_per_page' => 3,
+    'orderby'        => 'date',
+    'order'          => 'DESC',
+]);
+$news_page_id = (int) get_option('page_for_posts');
+?>
+<?php if (!empty($news_posts)): ?>
+<section class="news-section" id="naujienos">
+    <div class="container">
+        <div class="section-header" data-animate="fade-up">
+            <span class="section-eyebrow">Naujienos</span>
+            <h2 class="section-title">Naujausi įrašai</h2>
+        </div>
+
+        <div class="news-grid">
+            <?php foreach ($news_posts as $idx => $news_post):
+                setup_postdata($news_post);
+                $img_url = get_the_post_thumbnail_url($news_post, 'large');
+            ?>
+            <a href="<?php echo esc_url(get_permalink($news_post)); ?>" class="news-card" data-animate="card" data-index="<?php echo $idx; ?>">
+                <div class="news-card__image">
+                    <?php if ($img_url): ?>
+                        <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr(get_the_title($news_post)); ?>" loading="lazy">
+                    <?php else: ?>
+                        <div class="news-card__placeholder">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <div class="news-card__body">
+                    <span class="news-card__date"><?php echo esc_html(get_the_date('', $news_post)); ?></span>
+                    <h3 class="news-card__title"><?php echo esc_html(get_the_title($news_post)); ?></h3>
+                    <span class="news-card__link">
+                        Skaityti daugiau
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </span>
+                </div>
+            </a>
+            <?php endforeach; wp_reset_postdata(); ?>
+        </div>
+
+        <?php if ($news_page_id): ?>
+        <div class="section-footer" data-animate="fade-up">
+            <a href="<?php echo esc_url(get_permalink($news_page_id)); ?>" class="btn btn--outline btn--lg">
+                Visos naujienos
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+        </div>
+        <?php endif; ?>
+    </div>
+</section>
+<?php endif; ?>
+
 <!-- CTA BANNER -->
 <section class="cta-banner">
     <div class="cta-banner__bg" aria-hidden="true"></div>
