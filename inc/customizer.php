@@ -2,6 +2,28 @@
 
 function scaff_customizer_register($wp_customize) {
 
+    // ── HEADER STYLE ─────────────────────────────────────────────────────────
+    $wp_customize->add_section('scaff_header_style_section', [
+        'title'    => __('Header Style', 'scaff'),
+        'priority' => 29,
+    ]);
+
+    $wp_customize->add_setting('scaff_header_style', [
+        'default'           => 'default',
+        'sanitize_callback' => 'scaff_sanitize_header_style',
+        'transport'         => 'refresh',
+    ]);
+    $wp_customize->add_control('scaff_header_style', [
+        'label'   => __('Desktop Menu Style', 'scaff'),
+        'section' => 'scaff_header_style_section',
+        'type'    => 'radio',
+        'choices' => [
+            'default'        => __('Kaip dabar (top juosta)', 'scaff'),
+            'sidebar'        => __('Meniu visada kairėje', 'scaff'),
+            'scroll-sidebar' => __('Top juosta, slenkant žemyn → kairėje', 'scaff'),
+        ],
+    ]);
+
     // ── TOP BAR ──────────────────────────────────────────────────────────────
     $wp_customize->add_section('scaff_topbar', [
         'title'    => __('Top Bar', 'scaff'),
@@ -58,10 +80,25 @@ function scaff_customizer_register($wp_customize) {
     scaff_add_setting($wp_customize, 'scaff_about_cta', 'Sužinoti daugiau', 'scaff_about', 'text');
     scaff_add_setting($wp_customize, 'scaff_about_cta_url', '/apie-mus', 'scaff_about', 'url');
 
+    // ── PARTNERS ─────────────────────────────────────────────────────────────
+    $wp_customize->add_section('scaff_partners', [
+        'title'    => __('Partners Section', 'scaff'),
+        'priority' => 34,
+    ]);
+
+    scaff_add_setting($wp_customize, 'scaff_partners_eyebrow', 'MŪSŲ PARTNERIAI', 'scaff_partners', 'text');
+    scaff_add_setting($wp_customize, 'scaff_partners_title', 'Partneriai', 'scaff_partners', 'text');
+
+    // Up to 8 partner logos. Leave a logo empty to remove that slot from the section.
+    for ($i = 1; $i <= 8; $i++) {
+        scaff_add_setting($wp_customize, "scaff_partner_{$i}_logo", '', 'scaff_partners', 'image');
+        scaff_add_setting($wp_customize, "scaff_partner_{$i}_url", '', 'scaff_partners', 'url');
+    }
+
     // ── USP BLOCKS ───────────────────────────────────────────────────────────
     $wp_customize->add_section('scaff_usp', [
         'title'    => __('USP Blocks', 'scaff'),
-        'priority' => 34,
+        'priority' => 35,
     ]);
 
     $usp_defaults = [
@@ -80,7 +117,7 @@ function scaff_customizer_register($wp_customize) {
     // ── KONTAKTAI ─────────────────────────────────────────────────────────────
     $wp_customize->add_section('scaff_contact', [
         'title'    => __('Kontaktai', 'scaff'),
-        'priority' => 35,
+        'priority' => 36,
     ]);
 
     scaff_add_setting($wp_customize, 'scaff_contact_form_title', 'Parašykite mums', 'scaff_contact', 'text');
@@ -96,7 +133,7 @@ function scaff_customizer_register($wp_customize) {
     // ── FOOTER ───────────────────────────────────────────────────────────────
     $wp_customize->add_section('scaff_footer', [
         'title'    => __('Footer', 'scaff'),
-        'priority' => 36,
+        'priority' => 37,
     ]);
 
     scaff_add_setting($wp_customize, 'scaff_footer_tagline', 'Pastolių įrankiai ir darbo aukštyje įranga profesionalams.', 'scaff_footer', 'textarea');
@@ -105,7 +142,7 @@ function scaff_customizer_register($wp_customize) {
     // ── COLORS ───────────────────────────────────────────────────────────────
     $wp_customize->add_section('scaff_colors', [
         'title'    => __('Theme Colors', 'scaff'),
-        'priority' => 37,
+        'priority' => 38,
     ]);
 
     scaff_add_color_setting($wp_customize, 'scaff_color_accent', '#FF6A00', 'scaff_colors', 'Accent Color');
@@ -113,6 +150,11 @@ function scaff_customizer_register($wp_customize) {
     scaff_add_color_setting($wp_customize, 'scaff_color_surface', '#161616', 'scaff_colors', 'Surface Color');
 }
 add_action('customize_register', 'scaff_customizer_register');
+
+function scaff_sanitize_header_style($value) {
+    $allowed = ['default', 'sidebar', 'scroll-sidebar'];
+    return in_array($value, $allowed, true) ? $value : 'default';
+}
 
 
 function scaff_add_setting($wp_customize, $id, $default, $section, $type = 'text') {

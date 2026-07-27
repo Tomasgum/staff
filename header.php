@@ -60,12 +60,6 @@
 
             <!-- HEADER ACTIONS -->
             <div class="site-header__actions">
-                <?php if (class_exists('WooCommerce')): ?>
-                <a href="<?php echo esc_url(wc_get_cart_url()); ?>" class="header-cart" aria-label="Cart">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
-                </a>
-                <?php endif; ?>
-
                 <a href="<?php echo esc_url(get_permalink(get_page_by_path('susisiekti'))); ?>" class="btn btn--primary btn--sm header-contact-btn">
                     Susisiekti
                 </a>
@@ -108,5 +102,42 @@
         </div>
     </div>
     <div class="mobile-menu__backdrop" id="mobileMenuBackdrop"></div>
+
+    <?php if (get_theme_mod('scaff_header_style', 'default') !== 'default'): ?>
+    <!-- SIDEBAR NAV (alternate desktop header style) -->
+    <aside class="site-sidebar-nav">
+        <div class="site-sidebar-nav__logo">
+            <?php if (has_custom_logo()): ?>
+                <?php the_custom_logo(); ?>
+            <?php else: ?>
+                <a href="<?php echo esc_url(home_url('/')); ?>" rel="home" class="site-logo-text">
+                    <?php bloginfo('name'); ?>
+                </a>
+            <?php endif; ?>
+        </div>
+
+        <nav class="sidebar-nav" role="navigation" aria-label="<?php esc_attr_e('Primary Menu', 'scaff'); ?>">
+            <?php
+            wp_nav_menu([
+                'theme_location' => 'primary',
+                'menu_id'        => 'sidebar-menu',
+                'menu_class'     => 'sidebar-nav__list',
+                'container'      => false,
+                'fallback_cb'    => false,
+            ]);
+            ?>
+        </nav>
+
+        <div class="site-sidebar-nav__footer">
+            <a href="tel:<?php echo esc_attr(preg_replace('/\s+/', '', scaff_get('scaff_topbar_phone', '+37067834889'))); ?>" class="sidebar-nav__contact">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.04a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92l-.08 2z"/></svg>
+                <?php echo esc_html(scaff_get('scaff_topbar_phone', '+370 678 34 889')); ?>
+            </a>
+            <a href="<?php echo esc_url(get_permalink(get_page_by_path('susisiekti'))); ?>" class="btn btn--primary btn--sm sidebar-nav__cta">
+                Susisiekti
+            </a>
+        </div>
+    </aside>
+    <?php endif; ?>
 
     <main id="main" class="site-main">

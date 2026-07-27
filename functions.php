@@ -93,6 +93,10 @@ function scaff_body_classes($classes) {
     if (is_woocommerce() || is_cart() || is_checkout()) {
         $classes[] = 'woo-page';
     }
+    $header_style = get_theme_mod('scaff_header_style', 'default');
+    if ($header_style === 'sidebar' || $header_style === 'scroll-sidebar') {
+        $classes[] = 'header-style-' . $header_style;
+    }
     return $classes;
 }
 add_filter('body_class', 'scaff_body_classes');

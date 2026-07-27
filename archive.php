@@ -8,7 +8,7 @@
 </div>
 
 <div class="container">
-    <div class="content-wrap" style="padding:48px 0 80px">
+    <div class="content-wrap">
         <?php if (have_posts()): ?>
         <div class="posts-grid">
             <?php while (have_posts()): the_post(); ?>

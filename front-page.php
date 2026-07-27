@@ -253,6 +253,41 @@ if (class_exists('WooCommerce')) {
     </div>
 </section>
 
+<!-- PARTNERS -->
+<?php
+$partners = [];
+for ($i = 1; $i <= 8; $i++) {
+    $logo = scaff_get("scaff_partner_{$i}_logo");
+    if ($logo) {
+        $partners[] = ['logo' => $logo, 'url' => scaff_get("scaff_partner_{$i}_url")];
+    }
+}
+?>
+<?php if (!empty($partners)): ?>
+<section class="partners-section" id="partneriai">
+    <div class="container">
+        <div class="section-header" data-animate="fade-up">
+            <span class="section-eyebrow"><?php echo esc_html(scaff_get('scaff_partners_eyebrow', 'MŪSŲ PARTNERIAI')); ?></span>
+            <h2 class="section-title"><?php echo esc_html(scaff_get('scaff_partners_title', 'Partneriai')); ?></h2>
+        </div>
+
+        <div class="partners-grid">
+            <?php foreach ($partners as $partner): ?>
+                <?php if ($partner['url']): ?>
+                <a href="<?php echo esc_url($partner['url']); ?>" class="partner-logo" target="_blank" rel="noopener noreferrer">
+                    <img src="<?php echo esc_url($partner['logo']); ?>" alt="Partneris" loading="lazy">
+                </a>
+                <?php else: ?>
+                <div class="partner-logo">
+                    <img src="<?php echo esc_url($partner['logo']); ?>" alt="Partneris" loading="lazy">
+                </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
 <!-- NEWS -->
 <?php
 $news_posts = get_posts([

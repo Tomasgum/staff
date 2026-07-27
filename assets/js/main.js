@@ -358,7 +358,9 @@
       if (!ticking) {
         requestAnimationFrame(() => {
           const currentScroll = window.scrollY;
-          header.classList.toggle('scrolled', currentScroll > 60);
+          const isScrolled = currentScroll > 60;
+          header.classList.toggle('scrolled', isScrolled);
+          document.body.classList.toggle('is-header-scrolled', isScrolled);
           lastScroll = currentScroll;
           ticking = false;
         });
