@@ -8,6 +8,9 @@
             elseif (is_search())   printf(__('Paieška: "%s"', 'scaff'), get_search_query());
             else                   echo esc_html(get_bloginfo('name'));
         ?></h1>
+        <?php if (is_home() && ($intro = scaff_get('scaff_news_intro'))): ?>
+        <p class="archive-description"><?php echo esc_html($intro); ?></p>
+        <?php endif; ?>
     </div>
 </div>
 

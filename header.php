@@ -15,6 +15,27 @@
     <div class="topbar">
         <div class="topbar__container container">
             <div class="topbar__left">
+                <?php
+                $topbar_socials = [];
+                for ($i = 1; $i <= 3; $i++) {
+                    $social_url = scaff_get("scaff_topbar_social_{$i}_url");
+                    if ($social_url) {
+                        $topbar_socials[] = [
+                            'url'  => $social_url,
+                            'icon' => scaff_get("scaff_topbar_social_{$i}_icon", 'facebook'),
+                        ];
+                    }
+                }
+                ?>
+                <?php if ($topbar_socials): ?>
+                <div class="topbar__social">
+                    <?php foreach ($topbar_socials as $social): ?>
+                    <a href="<?php echo esc_url($social['url']); ?>" class="topbar__social-link" target="_blank" rel="noopener" aria-label="<?php echo esc_attr(ucfirst($social['icon'])); ?>">
+                        <?php echo scaff_social_icon_svg($social['icon']); ?>
+                    </a>
+                    <?php endforeach; ?>
+                </div>
+                <?php endif; ?>
                 <span class="topbar__promo"><?php echo esc_html(scaff_get('scaff_topbar_text', 'DĖL ĮMONĖMS SKIRTOS KAINODAROS SUSISIEKITE')); ?></span>
             </div>
             <div class="topbar__right">

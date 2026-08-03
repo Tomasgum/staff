@@ -192,6 +192,26 @@ h4 { font-size: 1.1rem; }
 .topbar__left {
   flex: 1 1 auto;
   min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.topbar__social {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.topbar__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.9);
+  transition: color 0.2s, transform 0.2s;
+}
+.topbar__social-link:hover {
+  color: var(--white);
+  transform: translateY(-1px);
 }
 .topbar__promo {
   display: block;
@@ -931,6 +951,26 @@ h4 { font-size: 1.1rem; }
   transition: opacity 0.3s, transform 0.3s var(--ease-out);
 }
 .category-card:hover .category-card__arrow { opacity: 1; transform: scale(1); }
+.category-card__badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.25);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white);
+}
 
 /* ── PRODUCTS SECTION ────────────────────────────────────── */
 .products-section {
@@ -962,7 +1002,7 @@ h4 { font-size: 1.1rem; }
 @media (max-width: 480px)  { .products-grid { grid-template-columns: 1fr; } }
 
 .product-card {
-  background: var(--surface-2);
+  background: var(--surface);
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--border);
@@ -977,43 +1017,75 @@ h4 { font-size: 1.1rem; }
 }
 .product-card__image-link { display: block; }
 .product-card__image-wrap {
+  position: relative;
   aspect-ratio: 1;
   overflow: hidden;
-  background: var(--surface);
+  background: var(--white);
+  padding: 22px;
 }
 .product-card__image-wrap img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.5s var(--ease-out);
 }
-.product-card:hover .product-card__image-wrap img { transform: scale(1.04); }
+.product-card:hover .product-card__image-wrap img { transform: scale(1.06); }
+.product-card__badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  border-radius: 20px;
+  background: var(--dark);
+  border: 1px solid var(--border-light);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
 .product-card__body {
   padding: 18px;
   display: flex;
   flex-direction: column;
   flex: 1;
+  border-top: 1px solid var(--border);
 }
 .product-card__cat {
-  font-size: 0.68rem;
+  display: inline-block;
+  font-size: 0.65rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 6px;
+  color: var(--text-subtle);
+  margin-bottom: 8px;
 }
 .product-card__title {
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--white);
   line-height: 1.3;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   flex: 1;
   font-family: var(--font-sans);
   letter-spacing: 0;
 }
 .product-card__title a { transition: color 0.2s; }
 .product-card__title a:hover { color: var(--accent); }
+.product-card__price {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 14px;
+  font-family: var(--font-sans);
+}
+.product-card__price ins { text-decoration: none; }
+.product-card__price del { color: var(--text-subtle); font-size: 0.75em; font-weight: 500; margin-right: 6px; }
 .product-card__actions {
   display: flex;
   flex-direction: column;
@@ -1150,6 +1222,101 @@ h4 { font-size: 1.1rem; }
 .partner-logo:hover img {
   filter: none;
   opacity: 1;
+}
+.partners-section--page { border-top: none; }
+.partners-section__subtitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--white);
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* ── PARTNERS: FEATURED (Partneriai puslapis — atstovai) ────── */
+.partners-featured {
+  padding: 90px 0 40px;
+}
+.partners-featured__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+}
+.partner-featured-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 240px;
+  padding: 32px 24px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: transform 0.3s var(--ease-out), border-color 0.2s, box-shadow 0.3s;
+}
+a.partner-featured-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(var(--accent-rgb), 0.35);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+.partner-featured-card__photo {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--dark);
+  border: 2px solid rgba(var(--accent-rgb), 0.4);
+  margin-bottom: 18px;
+  flex-shrink: 0;
+}
+.partner-featured-card__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.partner-featured-card__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-subtle);
+}
+.partner-featured-card__name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.partner-featured-card__role {
+  font-size: 0.8rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+/* ── ABOUT PAGE GALLERY ──────────────────────────────────── */
+.about-page-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 860px;
+  padding-bottom: 80px;
+}
+.about-page-gallery__item {
+  aspect-ratio: 4/3;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--surface);
+}
+.about-page-gallery__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media (max-width: 640px) {
+  .about-page-gallery { grid-template-columns: 1fr; gap: 14px; }
 }
 
 /* ── NEWS SECTION ────────────────────────────────────────── */

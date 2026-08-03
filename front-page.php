@@ -129,6 +129,10 @@ if (class_exists('WooCommerce')) {
                     <?php endif; ?>
                     <div class="category-card__overlay"></div>
                 </div>
+                <span class="category-card__badge">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                    Kategorija
+                </span>
                 <div class="category-card__content">
                     <h3 class="category-card__title"><?php echo esc_html($cat->name); ?></h3>
                     <span class="category-card__count"><?php echo $cat->count; ?> produktų</span>
@@ -181,6 +185,10 @@ if (class_exists('WooCommerce')) {
             <div class="product-card" data-animate="card" data-index="<?php echo $idx; ?>">
                 <a href="<?php echo esc_url(get_permalink($product->get_id())); ?>" class="product-card__image-link">
                     <div class="product-card__image-wrap">
+                        <span class="product-card__badge">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41L11 3.83V3H3v8h.83l9.58 9.59a2 2 0 002.83 0l4.35-4.35a2 2 0 000-2.83z"/><circle cx="6.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+                            Produktas
+                        </span>
                         <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($product->get_name()); ?>" loading="lazy">
                     </div>
                 </a>
@@ -191,6 +199,7 @@ if (class_exists('WooCommerce')) {
                     <h3 class="product-card__title">
                         <a href="<?php echo esc_url(get_permalink($product->get_id())); ?>"><?php echo esc_html($product->get_name()); ?></a>
                     </h3>
+                    <span class="product-card__price"><?php echo wp_kses_post($product->get_price_html()); ?></span>
                     <div class="product-card__actions">
                         <a href="tel:<?php echo esc_attr(preg_replace('/\s+/', '', $phone)); ?>" class="btn btn--primary btn--sm">Teirautis dėl kainos</a>
                         <a href="<?php echo esc_url(get_permalink($product->get_id())); ?>" class="btn btn--ghost btn--sm">Žiūrėti</a>
@@ -351,8 +360,8 @@ $news_page_id = (int) get_option('page_for_posts');
     <div class="cta-banner__bg" aria-hidden="true"></div>
     <div class="container">
         <div class="cta-banner__content" data-animate="fade-up">
-            <h2 class="cta-banner__title">Reikia konsultacijos?</h2>
-            <p class="cta-banner__text">Mūsų specialistai pasiruošę padėti pasirinkti tinkamą įrangą jūsų projektui.</p>
+            <h2 class="cta-banner__title"><?php echo esc_html(scaff_get('scaff_cta_title', 'Reikia konsultacijos?')); ?></h2>
+            <p class="cta-banner__text"><?php echo esc_html(scaff_get('scaff_cta_text', 'Mūsų specialistai pasiruošę padėti pasirinkti tinkamą įrangą jūsų projektui.')); ?></p>
             <div class="cta-banner__actions">
                 <?php $phone = scaff_get('scaff_contact_phone', '+370 678 34 889'); ?>
                 <a href="tel:<?php echo esc_attr(preg_replace('/\s+/', '', $phone)); ?>" class="btn btn--white btn--lg">
