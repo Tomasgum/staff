@@ -13,7 +13,7 @@
 
 <div class="container">
     <div class="page-content">
-        <?php the_content(); ?>
+        <?php echo wp_kses_post(wpautop(scaff_get('scaff_about_page_text', "ScaffShop – specializuota parduotuvė, siūlanti pastolių įrankius ir darbo aukštyje įrangą.\n\nDirbame su geriausiomis pasaulinėmis prekės ženklais ir garantuojame aukščiausią kokybę kiekvienam produktui."))); ?>
     </div>
 
     <?php

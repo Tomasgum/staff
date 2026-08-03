@@ -139,9 +139,8 @@ function scaff_customizer_register($wp_customize) {
     // PANEL: APIE MUS (puslapis)
     // ════════════════════════════════════════════════════════════════════════
     $wp_customize->add_panel('scaff_panel_apie_mus', [
-        'title'       => __('Apie mus', 'scaff'),
-        'priority'    => 15,
-        'description' => __('"Apie mus" puslapio turinys. Pagrindinis tekstas redaguojamas per Puslapiai → Apie mus, čia valdomos tik nuotraukos ir antraštė.', 'scaff'),
+        'title'    => __('Apie mus', 'scaff'),
+        'priority' => 15,
     ]);
 
     $wp_customize->add_section('scaff_about_page', [
@@ -151,6 +150,7 @@ function scaff_customizer_register($wp_customize) {
     ]);
 
     scaff_add_setting($wp_customize, 'scaff_about_page_eyebrow', 'APIE MUS', 'scaff_about_page', 'text');
+    scaff_add_setting($wp_customize, 'scaff_about_page_text', "ScaffShop – specializuota parduotuvė, siūlanti pastolių įrankius ir darbo aukštyje įrangą.\n\nDirbame su geriausiomis pasaulinėmis prekės ženklais ir garantuojame aukščiausią kokybę kiekvienam produktui.", 'scaff_about_page', 'textarea');
     for ($i = 1; $i <= 4; $i++) {
         scaff_add_setting($wp_customize, "scaff_about_page_photo_{$i}", '', 'scaff_about_page', 'image');
     }
