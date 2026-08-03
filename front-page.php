@@ -202,7 +202,6 @@ if (class_exists('WooCommerce')) {
                     <h3 class="product-card__title">
                         <a href="<?php echo esc_url(get_permalink($product->get_id())); ?>"><?php echo esc_html($product->get_name()); ?></a>
                     </h3>
-                    <span class="product-card__price"><?php echo wp_kses_post($product->get_price_html()); ?></span>
                     <div class="product-card__actions">
                         <a href="tel:<?php echo esc_attr(preg_replace('/\s+/', '', $phone)); ?>" class="btn btn--primary btn--sm">Teirautis dėl kainos</a>
                         <a href="<?php echo esc_url(get_permalink($product->get_id())); ?>" class="btn btn--ghost btn--sm">Žiūrėti</a>

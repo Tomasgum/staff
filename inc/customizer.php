@@ -263,6 +263,7 @@ function scaff_customizer_register($wp_customize) {
     scaff_add_setting($wp_customize, 'scaff_footer_fb_url', '', 'scaff_contact', 'url');
     scaff_add_setting($wp_customize, 'scaff_footer_ig_url', '', 'scaff_contact', 'url');
     scaff_add_setting($wp_customize, 'scaff_footer_li_url', '', 'scaff_contact', 'url');
+    scaff_add_setting($wp_customize, 'scaff_footer_yt_url', '', 'scaff_contact', 'url');
 
     // ── FOOTER ───────────────────────────────────────────────────────────────
     $wp_customize->add_section('scaff_footer', [
