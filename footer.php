@@ -7,10 +7,19 @@
         <div class="usp-band">
             <div class="container">
                 <div class="usp-band__grid">
-                    <?php for ($i = 1; $i <= 4; $i++):
-                        $icon  = scaff_get("scaff_usp_{$i}_icon", 'truck');
-                        $title = scaff_get("scaff_usp_{$i}_title", '');
-                        $text  = scaff_get("scaff_usp_{$i}_text", '');
+                    <?php
+                    $usp_icon_defaults  = ['1' => 'truck', '2' => '', '3' => 'package', '4' => 'headphones'];
+                    $usp_title_defaults = ['1' => 'Greitas pristatymas', '2' => '', '3' => 'Atsiėmimas nemokamai', '4' => 'Ekspertų konsultacija'];
+                    $usp_text_defaults  = [
+                        '1' => 'Pristatome visoje Lietuvoje per 1–3 darbo dienas',
+                        '2' => '',
+                        '3' => 'Atsiimkite prekes nemokamai iš mūsų sandėlio',
+                        '4' => 'Mūsų specialistai padės pasirinkti tinkamą įrangą',
+                    ];
+                    for ($i = 1; $i <= 4; $i++):
+                        $icon  = scaff_get("scaff_usp_{$i}_icon", $usp_icon_defaults[$i]);
+                        $title = scaff_get("scaff_usp_{$i}_title", $usp_title_defaults[$i]);
+                        $text  = scaff_get("scaff_usp_{$i}_text", $usp_text_defaults[$i]);
                         if (!$title) continue;
                     ?>
                     <div class="usp-item" data-animate="fade-up">

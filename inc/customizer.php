@@ -122,7 +122,7 @@ function scaff_customizer_register($wp_customize) {
 
     $usp_defaults = [
         1 => ['icon' => 'truck', 'title' => 'Greitas pristatymas', 'text' => 'Pristatome visoje Lietuvoje per 1–3 darbo dienas'],
-        2 => ['icon' => 'refresh-cw', 'title' => '30 dienų grąžinimas', 'text' => 'Nepatiko? Grąžinkite per 30 dienų be jokių klausimų'],
+        2 => ['icon' => '', 'title' => '', 'text' => ''],
         3 => ['icon' => 'package', 'title' => 'Atsiėmimas nemokamai', 'text' => 'Atsiimkite prekes nemokamai iš mūsų sandėlio'],
         4 => ['icon' => 'headphones', 'title' => 'Ekspertų konsultacija', 'text' => 'Mūsų specialistai padės pasirinkti tinkamą įrangą'],
     ];
