@@ -107,9 +107,9 @@ if (class_exists('WooCommerce')) {
 <section class="categories-section" id="categories">
     <div class="container">
         <div class="section-header" data-animate="fade-up">
-            <span class="section-eyebrow">Mūsų produktai</span>
-            <h2 class="section-title">Kategorijos</h2>
-            <p class="section-subtitle">Raskite viską, ko reikia darbui aukštyje</p>
+            <span class="section-eyebrow"><?php echo esc_html(scaff_get('scaff_categories_eyebrow', 'Mūsų produktai')); ?></span>
+            <h2 class="section-title"><?php echo esc_html(scaff_get('scaff_categories_title', 'Kategorijos')); ?></h2>
+            <p class="section-subtitle"><?php echo esc_html(scaff_get('scaff_categories_subtitle', 'Raskite viską, ko reikia darbui aukštyje')); ?></p>
         </div>
 
         <div class="categories-grid">
@@ -172,8 +172,8 @@ if (class_exists('WooCommerce')) {
 <section class="products-section" id="products">
     <div class="container">
         <div class="section-header" data-animate="fade-up">
-            <span class="section-eyebrow">Rekomenduojami</span>
-            <h2 class="section-title">Populiarūs produktai</h2>
+            <span class="section-eyebrow"><?php echo esc_html(scaff_get('scaff_products_eyebrow', 'Rekomenduojami')); ?></span>
+            <h2 class="section-title"><?php echo esc_html(scaff_get('scaff_products_title', 'Populiarūs produktai')); ?></h2>
         </div>
 
         <div class="products-grid">
@@ -312,8 +312,8 @@ $news_page_id = (int) get_option('page_for_posts');
 <section class="news-section" id="naujienos">
     <div class="container">
         <div class="section-header" data-animate="fade-up">
-            <span class="section-eyebrow">Naujienos</span>
-            <h2 class="section-title">Naujausi įrašai</h2>
+            <span class="section-eyebrow"><?php echo esc_html(scaff_get('scaff_home_news_eyebrow', 'Naujienos')); ?></span>
+            <h2 class="section-title"><?php echo esc_html(scaff_get('scaff_home_news_title', 'Naujausi įrašai')); ?></h2>
         </div>
 
         <div class="news-grid">

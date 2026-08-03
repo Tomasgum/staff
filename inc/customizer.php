@@ -135,6 +135,16 @@ function scaff_customizer_register($wp_customize) {
     scaff_add_setting($wp_customize, 'scaff_cta_title', 'Reikia konsultacijos?', 'scaff_home_other', 'text');
     scaff_add_setting($wp_customize, 'scaff_cta_text', 'Mūsų specialistai pasiruošę padėti pasirinkti tinkamą įrangą jūsų projektui.', 'scaff_home_other', 'textarea');
 
+    scaff_add_setting($wp_customize, 'scaff_categories_eyebrow', 'Mūsų produktai', 'scaff_home_other', 'text');
+    scaff_add_setting($wp_customize, 'scaff_categories_title', 'Kategorijos', 'scaff_home_other', 'text');
+    scaff_add_setting($wp_customize, 'scaff_categories_subtitle', 'Raskite viską, ko reikia darbui aukštyje', 'scaff_home_other', 'text');
+
+    scaff_add_setting($wp_customize, 'scaff_products_eyebrow', 'Rekomenduojami', 'scaff_home_other', 'text');
+    scaff_add_setting($wp_customize, 'scaff_products_title', 'Populiarūs produktai', 'scaff_home_other', 'text');
+
+    scaff_add_setting($wp_customize, 'scaff_home_news_eyebrow', 'Naujienos', 'scaff_home_other', 'text');
+    scaff_add_setting($wp_customize, 'scaff_home_news_title', 'Naujausi įrašai', 'scaff_home_other', 'text');
+
     // ════════════════════════════════════════════════════════════════════════
     // PANEL: APIE MUS (puslapis)
     // ════════════════════════════════════════════════════════════════════════
