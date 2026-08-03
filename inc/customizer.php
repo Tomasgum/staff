@@ -159,10 +159,10 @@ function scaff_customizer_register($wp_customize) {
         'priority' => 1,
     ]);
 
-    scaff_add_setting($wp_customize, 'scaff_about_page_eyebrow', 'APIE MUS', 'scaff_about_page', 'text');
-    scaff_add_setting($wp_customize, 'scaff_about_page_text', "ScaffShop – specializuota parduotuvė, siūlanti pastolių įrankius ir darbo aukštyje įrangą.\n\nDirbame su geriausiomis pasaulinėmis prekės ženklais ir garantuojame aukščiausią kokybę kiekvienam produktui.", 'scaff_about_page', 'textarea');
+    scaff_add_setting($wp_customize, 'scaff_about_page_eyebrow', 'APIE MUS', 'scaff_about_page', 'text', 'Viršutinė antraštė (eyebrow)');
+    scaff_add_setting($wp_customize, 'scaff_about_page_text', "ScaffShop – specializuota parduotuvė, siūlanti pastolių įrankius ir darbo aukštyje įrangą.\n\nDirbame su geriausiomis pasaulinėmis prekės ženklais ir garantuojame aukščiausią kokybę kiekvienam produktui.", 'scaff_about_page', 'textarea', 'Pagrindinis tekstas (tuščia eilutė = nauja pastraipa)');
     for ($i = 1; $i <= 4; $i++) {
-        scaff_add_setting($wp_customize, "scaff_about_page_photo_{$i}", '', 'scaff_about_page', 'image');
+        scaff_add_setting($wp_customize, "scaff_about_page_photo_{$i}", '', 'scaff_about_page', 'image', "Nuotrauka {$i}");
     }
 
     // ════════════════════════════════════════════════════════════════════════
@@ -285,7 +285,7 @@ function scaff_social_icon_svg($type) {
 }
 
 
-function scaff_add_setting($wp_customize, $id, $default, $section, $type = 'text') {
+function scaff_add_setting($wp_customize, $id, $default, $section, $type = 'text', $label = null) {
     $wp_customize->add_setting($id, [
         'default'           => $default,
         'sanitize_callback' => $type === 'url' ? 'esc_url_raw' : ($type === 'textarea' ? 'sanitize_textarea_field' : 'sanitize_text_field'),
@@ -293,7 +293,7 @@ function scaff_add_setting($wp_customize, $id, $default, $section, $type = 'text
     ]);
 
     $control_args = [
-        'label'   => ucwords(str_replace(['scaff_', '_'], ['', ' '], $id)),
+        'label'   => $label ?? ucwords(str_replace(['scaff_', '_'], ['', ' '], $id)),
         'section' => $section,
         'type'    => in_array($type, ['text', 'url', 'textarea']) ? ($type === 'textarea' ? 'textarea' : 'text') : 'text',
     ];
