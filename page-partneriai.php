@@ -26,6 +26,9 @@ for ($i = 1; $i <= 3; $i++) {
 <?php if (!empty($featured_partners)): ?>
 <section class="partners-featured">
     <div class="container">
+        <div class="section-header" data-animate="fade-up">
+            <span class="section-eyebrow">PAGRINDINIAI ATSTOVAI</span>
+        </div>
         <div class="partners-featured__grid">
             <?php foreach ($featured_partners as $idx => $p):
                 $tag = $p['url'] ? 'a' : 'div';
@@ -61,13 +64,10 @@ for ($i = 1; $i <= 8; $i++) {
 <?php if (!empty($partners)): ?>
 <section class="partners-section partners-section--page">
     <div class="container">
-        <?php if (empty($featured_partners)): ?>
         <div class="section-header" data-animate="fade-up">
             <span class="section-eyebrow"><?php echo esc_html(scaff_get('scaff_partners_eyebrow', 'MŪSŲ PARTNERIAI')); ?></span>
+            <h2 class="section-title"><?php echo esc_html(scaff_get('scaff_partners_title', 'Partneriai')); ?></h2>
         </div>
-        <?php else: ?>
-        <h2 class="partners-section__subtitle" data-animate="fade-up">Visi partneriai</h2>
-        <?php endif; ?>
 
         <div class="partners-grid">
             <?php foreach ($partners as $partner): ?>
