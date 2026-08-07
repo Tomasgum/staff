@@ -97,13 +97,29 @@
 <!-- PRODUCT CATEGORIES -->
 <?php
 if (class_exists('WooCommerce')) {
-    $categories = get_terms([
-        'taxonomy'   => 'product_cat',
-        'hide_empty' => true,
-        'parent'     => 0,
-        'number'     => 8,
-        'exclude'    => [get_option('default_product_cat')],
-    ]);
+    $manual_cat_ids = [];
+    for ($i = 1; $i <= 8; $i++) {
+        $cat_id = (int) scaff_get("scaff_home_cat_{$i}", '');
+        if ($cat_id) {
+            $manual_cat_ids[] = $cat_id;
+        }
+    }
+
+    if (!empty($manual_cat_ids)) {
+        $categories = get_terms([
+            'taxonomy' => 'product_cat',
+            'include'  => $manual_cat_ids,
+            'orderby'  => 'include',
+        ]);
+    } else {
+        $categories = get_terms([
+            'taxonomy'   => 'product_cat',
+            'hide_empty' => true,
+            'parent'     => 0,
+            'number'     => 8,
+            'exclude'    => [get_option('default_product_cat')],
+        ]);
+    }
 }
 ?>
 <?php if (!empty($categories) && !is_wp_error($categories)): ?>

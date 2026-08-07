@@ -145,6 +145,28 @@ function scaff_customizer_register($wp_customize) {
     scaff_add_setting($wp_customize, 'scaff_home_news_eyebrow', 'Naujienos', 'scaff_home_other', 'text');
     scaff_add_setting($wp_customize, 'scaff_home_news_title', 'Naujausi įrašai', 'scaff_home_other', 'text');
 
+    // ── KATEGORIJŲ TINKLELIS (pagrindinis) — rankinis kategorijų parinkimas ──
+    $wp_customize->add_section('scaff_home_categories', [
+        'title'       => __('Kategorijų tinklelis (pagrindinis)', 'scaff'),
+        'panel'       => 'scaff_panel_home',
+        'priority'    => 4,
+        'description' => __('Pasirinkite, kurios produktų kategorijos rodomos pagrindiniame puslapyje ir kokia tvarka. Palikus "— Automatiškai —" laukelius, sistema pati parinks kategorijas kaip iki šiol.', 'scaff'),
+    ]);
+
+    for ($i = 1; $i <= 8; $i++) {
+        $wp_customize->add_setting("scaff_home_cat_{$i}", [
+            'default'           => '',
+            'sanitize_callback' => 'scaff_sanitize_product_cat',
+            'transport'         => 'refresh',
+        ]);
+        $wp_customize->add_control("scaff_home_cat_{$i}", [
+            'label'   => sprintf(__('Kategorija #%d', 'scaff'), $i),
+            'section' => 'scaff_home_categories',
+            'type'    => 'select',
+            'choices' => scaff_product_cat_choices(),
+        ]);
+    }
+
     // ════════════════════════════════════════════════════════════════════════
     // PANEL: APIE MUS (puslapis)
     // ════════════════════════════════════════════════════════════════════════
@@ -285,6 +307,40 @@ function scaff_customizer_register($wp_customize) {
     scaff_add_color_setting($wp_customize, 'scaff_color_surface', '#161616', 'scaff_colors', 'Surface Color');
 }
 add_action('customize_register', 'scaff_customizer_register');
+
+function scaff_product_cat_choices() {
+    $choices = ['' => __('— Automatiškai —', 'scaff')];
+
+    if (!taxonomy_exists('product_cat')) {
+        return $choices;
+    }
+
+    $terms = get_terms([
+        'taxonomy'   => 'product_cat',
+        'hide_empty' => false,
+        'orderby'    => 'name',
+    ]);
+
+    if (is_wp_error($terms) || empty($terms)) {
+        return $choices;
+    }
+
+    foreach ($terms as $term) {
+        $prefix              = $term->parent ? '— ' : '';
+        $choices[$term->term_id] = $prefix . $term->name;
+    }
+
+    return $choices;
+}
+
+function scaff_sanitize_product_cat($value) {
+    $value = absint($value);
+    if (!$value) {
+        return '';
+    }
+    $term = get_term($value, 'product_cat');
+    return ($term && !is_wp_error($term)) ? $value : '';
+}
 
 function scaff_sanitize_header_style($value) {
     $allowed = ['default', 'sidebar', 'scroll-sidebar'];
