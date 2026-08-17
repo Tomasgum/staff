@@ -18,7 +18,7 @@
   --white:        #ffffff;
 
   /* Dot-grid texture — breaks up large flat-black areas, blueprint/technical feel */
-  --dots: radial-gradient(rgba(255,255,255,0.09) 1.4px, transparent 1.4px);
+  --dots: radial-gradient(rgba(255,255,255,0.12) 1.5px, transparent 1.5px);
   --dots-size: 22px 22px;
 
   --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
@@ -830,7 +830,7 @@ h4 { font-size: 1.1rem; }
 /* ── CATEGORIES ──────────────────────────────────────────── */
 .categories-section {
   padding: 100px 0;
-  background: var(--dark);
+  background: var(--dark) var(--dots) 0 0/var(--dots-size);
 }
 .categories-grid {
   display: grid;
