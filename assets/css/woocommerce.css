@@ -39,7 +39,7 @@
 }
 
 .woocommerce .woocommerce-products-header {
-  background: var(--surface) var(--dots) 0 0/var(--dots-size);
+  background: var(--surface);
   border-bottom: 1px solid var(--border);
   padding: 56px 0 40px;
   text-align: center;
