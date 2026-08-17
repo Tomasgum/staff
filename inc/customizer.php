@@ -114,12 +114,6 @@ function scaff_customizer_register($wp_customize) {
         'priority' => 3,
     ]);
 
-    for ($i = 1; $i <= 4; $i++) {
-        scaff_add_setting($wp_customize, "scaff_stat_{$i}_number", ['1' => '500+', '2' => '15+', '3' => '', '4' => '100%'][$i], 'scaff_home_other', 'text');
-        scaff_add_setting($wp_customize, "scaff_stat_{$i}_label", ['1' => 'Produktų kataloge', '2' => 'Metų patirtis', '3' => '', '4' => 'Kokybės garantija'][$i], 'scaff_home_other', 'text');
-        scaff_add_setting($wp_customize, "scaff_stat_{$i}_icon", ['1' => 'box', '2' => 'award', '3' => 'refresh-cw', '4' => 'shield'][$i], 'scaff_home_other', 'text');
-    }
-
     $usp_defaults = [
         1 => ['icon' => 'truck', 'title' => 'Greitas pristatymas', 'text' => 'Pristatome visoje Lietuvoje per 1–3 darbo dienas'],
         2 => ['icon' => '', 'title' => '', 'text' => ''],
@@ -187,28 +181,13 @@ function scaff_customizer_register($wp_customize) {
         scaff_add_setting($wp_customize, "scaff_about_page_photo_{$i}", '', 'scaff_about_page', 'image', "Nuotrauka {$i}");
     }
 
-    // ── STATISTIKA IR CTA — tie patys duomenys, kaip Pagrindinis puslapis → Kitos sekcijos ──
+    // ── CTA — tie patys duomenys, kaip Pagrindinis puslapis → Kitos sekcijos ──
     $wp_customize->add_section('scaff_about_page_extra', [
-        'title'       => __('Statistika ir CTA', 'scaff'),
+        'title'       => __('CTA juosta', 'scaff'),
         'panel'       => 'scaff_panel_apie_mus',
         'priority'    => 2,
         'description' => __('Šie laukai bendri su pagrindiniu puslapiu (Pagrindinis puslapis → Kitos sekcijos) — pakeitus čia, atsinaujina abi vietos.', 'scaff'),
     ]);
-
-    foreach ([1, 2, 4] as $i) {
-        $wp_customize->add_control("scaff_about_extra_stat_{$i}_number", [
-            'settings' => "scaff_stat_{$i}_number",
-            'label'    => sprintf(__('Statistika %d — skaičius', 'scaff'), $i),
-            'section'  => 'scaff_about_page_extra',
-            'type'     => 'text',
-        ]);
-        $wp_customize->add_control("scaff_about_extra_stat_{$i}_label", [
-            'settings' => "scaff_stat_{$i}_label",
-            'label'    => sprintf(__('Statistika %d — tekstas', 'scaff'), $i),
-            'section'  => 'scaff_about_page_extra',
-            'type'     => 'text',
-        ]);
-    }
 
     $wp_customize->add_control('scaff_about_extra_cta_title', [
         'settings' => 'scaff_cta_title',

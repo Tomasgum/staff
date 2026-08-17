@@ -103,25 +103,6 @@
       });
     }
 
-    // ── STATS BAR ──────────────────────────────────────────────
-    const statItems = document.querySelectorAll('.stat-item');
-    if (statItems.length) {
-      gsap.fromTo(statItems,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1, y: 0,
-          duration: 0.6,
-          stagger: 0.1,
-          ease,
-          scrollTrigger: {
-            trigger: '.stats-bar',
-            start: 'top 85%',
-            once: true,
-          }
-        }
-      );
-    }
-
     // ── SCROLL REVEAL: fade-up ─────────────────────────────────
     document.querySelectorAll('[data-animate="fade-up"]').forEach(el => {
       gsap.fromTo(el,
@@ -217,31 +198,6 @@
       );
     }
 
-    // ── COUNTER ANIMATION ──────────────────────────────────────
-    document.querySelectorAll('.stat-item__number').forEach(el => {
-      const raw = el.textContent.trim();
-      const target = parseInt(raw.replace(/\D/g, ''), 10);
-      const suffix = raw.replace(/[0-9]/g, '');
-      if (!target) return;
-
-      ScrollTrigger.create({
-        trigger: el,
-        start: 'top 90%',
-        once: true,
-        onEnter: () => {
-          gsap.fromTo({ n: 0 }, { n: target },
-            {
-              duration: 1.6,
-              ease: 'power2.out',
-              onUpdate: function () {
-                el.textContent = Math.round(this.targets()[0].n) + suffix;
-              }
-            }
-          );
-        }
-      });
-    });
-
     // ── CTA BANNER PARTICLE EFFECT ────────────────────────────
     const ctaBanner = document.querySelector('.cta-banner');
     if (ctaBanner) {
@@ -318,7 +274,7 @@
     }
 
     // ── HORIZONTAL LINE REVEALS ────────────────────────────────
-    document.querySelectorAll('.stats-bar, .usp-band, .products-section').forEach(section => {
+    document.querySelectorAll('.usp-band, .products-section').forEach(section => {
       const line = document.createElement('div');
       line.style.cssText = `
         position:absolute;left:0;bottom:0;height:2px;

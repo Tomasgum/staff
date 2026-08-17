@@ -70,30 +70,6 @@
     </div>
 </section>
 
-<!-- STATS BAR -->
-<section class="stats-bar">
-    <div class="container">
-        <div class="stats-bar__grid">
-            <?php
-            $stat_number_defaults = ['1' => '500+', '2' => '15+', '3' => '', '4' => '100%'];
-            $stat_label_defaults  = ['1' => 'Produktų kataloge', '2' => 'Metų patirtis', '3' => '', '4' => 'Kokybės garantija'];
-            for ($i = 1; $i <= 4; $i++):
-                $num   = scaff_get("scaff_stat_{$i}_number", $stat_number_defaults[$i]);
-                $label = scaff_get("scaff_stat_{$i}_label", $stat_label_defaults[$i]);
-                if (!$num && !$label) continue;
-            ?>
-            <div class="stat-item" data-animate="count">
-                <div class="stat-item__icon"><?php echo scaff_get_icon(scaff_get("scaff_stat_{$i}_icon", 'box')); ?></div>
-                <div class="stat-item__content">
-                    <span class="stat-item__number" data-target="<?php echo esc_attr(preg_replace('/[^0-9]/', '', $num)); ?>"><?php echo esc_html($num); ?></span>
-                    <span class="stat-item__label"><?php echo esc_html($label); ?></span>
-                </div>
-            </div>
-            <?php endfor; ?>
-        </div>
-    </div>
-</section>
-
 <!-- PRODUCT CATEGORIES -->
 <?php
 if (class_exists('WooCommerce')) {
