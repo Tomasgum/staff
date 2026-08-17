@@ -81,6 +81,7 @@ function scaff_widgets_init() {
 add_action('widgets_init', 'scaff_widgets_init');
 
 require_once SCAFF_DIR . '/inc/customizer.php';
+require_once SCAFF_DIR . '/inc/catalog.php';
 require_once SCAFF_DIR . '/inc/woocommerce-hooks.php';
 require_once SCAFF_DIR . '/inc/contact-form.php';
 

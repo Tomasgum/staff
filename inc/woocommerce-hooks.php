@@ -153,16 +153,8 @@ add_filter('loop_shop_per_page', function() { return 12; });
 
 // Category filter tab bar above the product grid
 add_action('woocommerce_before_shop_loop', function() {
-    $terms = get_terms([
-        'taxonomy'   => 'product_cat',
-        'hide_empty' => true,
-        'parent'     => 0,
-        'orderby'    => 'count',
-        'order'      => 'DESC',
-        'number'     => 10,
-        'exclude'    => get_option('default_product_cat'),
-    ]);
-    if (empty($terms) || is_wp_error($terms)) return;
+    $terms = scaff_get_catalog_categories(0);
+    if (empty($terms)) return;
 
     $current      = get_queried_object();
     $current_slug = ($current instanceof WP_Term && $current->taxonomy === 'product_cat') ? $current->slug : '';

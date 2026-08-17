@@ -166,6 +166,84 @@
   border-color: var(--accent);
 }
 
+/* ── CATALOG CATEGORY GRID ───────────────────────────────── */
+.catalog-landing__all {
+  text-align: center;
+  margin-top: 48px;
+}
+
+.catalog-cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.catalog-cat-grid--sm {
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+
+.catalog-cat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 28px 16px 22px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: transform 0.25s var(--ease-out), border-color 0.25s, background 0.25s;
+}
+.catalog-cat-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  background: var(--surface-2);
+}
+.catalog-cat-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--dark);
+  border: 1px solid var(--border-light);
+  color: var(--accent);
+  transition: background 0.25s, border-color 0.25s;
+}
+.catalog-cat-grid--sm .catalog-cat-card__icon {
+  width: 48px;
+  height: 48px;
+}
+.catalog-cat-grid--sm .catalog-cat-card__icon svg { width: 22px; height: 22px; }
+.catalog-cat-card:hover .catalog-cat-card__icon {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--dark);
+}
+.catalog-cat-card__icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.catalog-cat-card__name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+}
+.catalog-cat-grid--sm .catalog-cat-card__name { font-size: 0.9rem; }
+.catalog-cat-card__count {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
 /* ── PRODUCT LOOP ────────────────────────────────────────── */
 
 /* Kill WooCommerce's float clearfix pseudo-elements — in CSS grid they become grid items
