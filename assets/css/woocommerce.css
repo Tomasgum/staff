@@ -34,6 +34,10 @@
 
 .woocommerce .woocommerce-notices-wrapper { padding: 0 0 20px; }
 
+.woo-inner > h1.page-title {
+  margin-bottom: 40px;
+}
+
 .woocommerce .woocommerce-products-header {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
