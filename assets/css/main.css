@@ -17,9 +17,13 @@
   --text-subtle:  #555;
   --white:        #ffffff;
 
-  /* Dot-grid texture — breaks up large flat-black areas, blueprint/technical feel */
-  --dots: radial-gradient(rgba(255,255,255,0.12) 1.5px, transparent 1.5px);
+  /* Dot-grid texture — breaks up large flat-black areas, blueprint/technical feel.
+     Faded top-to-bottom via a gradient mask instead of a flat repeating tile,
+     so it reads as an intentional accent rather than uniform wallpaper. */
+  --dots: radial-gradient(rgba(255,255,255,0.16) 1.5px, transparent 1.5px);
   --dots-size: 22px 22px;
+  --dots-fade-dark:    linear-gradient(to bottom, transparent, var(--dark) 65%),    var(--dots) 0 0/var(--dots-size) var(--dark);
+  --dots-fade-surface: linear-gradient(to bottom, transparent, var(--surface) 65%), var(--dots) 0 0/var(--dots-size) var(--surface);
 
   --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
   --font-display: 'Barlow Condensed', 'Inter', sans-serif;
@@ -561,7 +565,7 @@ h4 { font-size: 1.1rem; }
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: var(--dark) var(--dots) 0 0/var(--dots-size);
+  background: var(--dots-fade-dark);
 }
 .hero__bg {
   position: absolute;
@@ -830,7 +834,7 @@ h4 { font-size: 1.1rem; }
 /* ── CATEGORIES ──────────────────────────────────────────── */
 .categories-section {
   padding: 100px 0;
-  background: var(--dark) var(--dots) 0 0/var(--dots-size);
+  background: var(--dots-fade-dark);
 }
 .categories-grid {
   display: grid;
@@ -1433,7 +1437,7 @@ a.partner-featured-card:hover {
 
 /* ── FOOTER ──────────────────────────────────────────────── */
 .footer-main {
-  background: var(--dark) var(--dots) 0 0/var(--dots-size);
+  background: var(--dots-fade-dark);
   padding: 72px 0 48px;
   border-top: 1px solid var(--border);
 }
