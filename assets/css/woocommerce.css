@@ -67,24 +67,6 @@ body.woo-page {
   background: radial-gradient(ellipse at top, rgba(255,255,255,0.30), transparent 72%);
   pointer-events: none;
 }
-.woo-inner > h1.page-title::after {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  left: -30%;
-  right: -30%;
-  bottom: -20%;
-  height: 85%;
-  background-image:
-    linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: var(--grid-size);
-  transform: perspective(500px) rotateX(50deg);
-  transform-origin: bottom center;
-  -webkit-mask-image: linear-gradient(to top, black 0%, black 55%, transparent 95%);
-  mask-image: linear-gradient(to top, black 0%, black 55%, transparent 95%);
-  pointer-events: none;
-}
 
 /* ── CATEGORY TAB BAR ────────────────────────────────────────
    Wraps into as many rows as needed instead of forcing horizontal
