@@ -18,15 +18,8 @@
 
 /* ── SHOP LAYOUT ─────────────────────────────────────────── */
 
-/* Same grid-line texture as the homepage's dark sections, fixed so it
-   doesn't just scroll away after the first screen of a long product list */
 body.woo-page {
   background-color: var(--dark);
-  background-image:
-    linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: var(--grid-size);
-  background-attachment: fixed;
 }
 
 /* Full-width wrapper for all WooCommerce pages */
@@ -45,26 +38,52 @@ body.woo-page {
 
 .woocommerce .woocommerce-notices-wrapper { padding: 0 0 20px; }
 
+/* This is the real, full-bleed title band — .woocommerce-products-header
+   was dead CSS (that wrapper element is never actually output by our
+   custom woocommerce.php), so nothing in it was ever rendering. */
 .woo-inner > h1.page-title {
-  margin-bottom: 40px;
-}
-
-.woocommerce .woocommerce-products-header {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
   background-color: var(--surface);
-  background-image:
-    linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: var(--grid-size);
   border-bottom: 1px solid var(--border);
   padding: 56px 0 40px;
   text-align: center;
   margin: -40px -40px 40px;
-}
-.woocommerce .woocommerce-products-header__title {
   font-family: var(--font-display);
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 800;
   color: var(--white);
+}
+.woo-inner > h1.page-title::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: -15%;
+  left: 50%;
+  width: 75%;
+  height: 70%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at top, rgba(255,255,255,0.20), transparent 72%);
+  pointer-events: none;
+}
+.woo-inner > h1.page-title::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: -30%;
+  right: -30%;
+  bottom: -20%;
+  height: 85%;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: var(--grid-size);
+  transform: perspective(380px) rotateX(62deg);
+  transform-origin: bottom center;
+  -webkit-mask-image: linear-gradient(to top, black 0%, black 40%, transparent 92%);
+  mask-image: linear-gradient(to top, black 0%, black 40%, transparent 92%);
+  pointer-events: none;
 }
 
 /* ── CATEGORY TAB BAR ────────────────────────────────────────
