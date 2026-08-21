@@ -353,7 +353,7 @@ $news_page_id = (int) get_option('page_for_posts');
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.04a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92l-.08 2z"/></svg>
                     <?php echo esc_html($phone); ?>
                 </a>
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('susisiekti'))); ?>" class="btn btn--outline-light btn--lg">
+                <a href="<?php echo esc_url('https://wa.me/' . preg_replace('/[^0-9]/', '', $phone)); ?>" target="_blank" rel="noopener noreferrer" class="btn btn--outline-light btn--lg">
                     Rašyti žinutę
                 </a>
             </div>
