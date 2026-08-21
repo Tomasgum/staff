@@ -282,8 +282,8 @@ function scaff_customizer_register($wp_customize) {
     ]);
 
     scaff_add_color_setting($wp_customize, 'scaff_color_accent', '#FF6A00', 'scaff_colors', 'Accent Color');
-    scaff_add_color_setting($wp_customize, 'scaff_color_dark', '#0D0D0D', 'scaff_colors', 'Dark Background');
-    scaff_add_color_setting($wp_customize, 'scaff_color_surface', '#161616', 'scaff_colors', 'Surface Color');
+    scaff_add_color_setting($wp_customize, 'scaff_color_dark', '#141414', 'scaff_colors', 'Dark Background');
+    scaff_add_color_setting($wp_customize, 'scaff_color_surface', '#1c1c1c', 'scaff_colors', 'Surface Color');
 }
 add_action('customize_register', 'scaff_customizer_register');
 
@@ -389,22 +389,28 @@ function scaff_add_color_setting($wp_customize, $id, $default, $section, $label)
     ]));
 }
 
+// Only override tokens the client has actually picked a custom color for —
+// this used to always print all three with stale hardcoded defaults, which
+// silently fought every design-token change made directly in main.css.
 function scaff_customizer_css() {
-    $accent  = get_theme_mod('scaff_color_accent', '#FF6A00');
-    $dark    = get_theme_mod('scaff_color_dark', '#0D0D0D');
-    $surface = get_theme_mod('scaff_color_surface', '#161616');
+    $lines = [];
 
-    // Convert hex to RGB for rgba usage
-    list($r, $g, $b) = sscanf($accent, '#%02x%02x%02x');
-
-    echo "<style>
-    :root {
-        --accent: {$accent};
-        --accent-rgb: {$r}, {$g}, {$b};
-        --dark: {$dark};
-        --surface: {$surface};
+    if (has_theme_mod('scaff_color_accent')) {
+        $accent = get_theme_mod('scaff_color_accent');
+        list($r, $g, $b) = sscanf($accent, '#%02x%02x%02x');
+        $lines[] = "--accent: {$accent};";
+        $lines[] = "--accent-rgb: {$r}, {$g}, {$b};";
     }
-    </style>\n";
+    if (has_theme_mod('scaff_color_dark')) {
+        $lines[] = '--dark: ' . get_theme_mod('scaff_color_dark') . ';';
+    }
+    if (has_theme_mod('scaff_color_surface')) {
+        $lines[] = '--surface: ' . get_theme_mod('scaff_color_surface') . ';';
+    }
+
+    if (empty($lines)) return;
+
+    echo "<style>\n:root {\n" . implode("\n", $lines) . "\n}\n</style>\n";
 }
 add_action('wp_head', 'scaff_customizer_css');
 
