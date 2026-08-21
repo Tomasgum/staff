@@ -22,8 +22,7 @@
      so it reads as an intentional accent rather than uniform wallpaper. */
   --dots: radial-gradient(rgba(255,255,255,0.16) 1.5px, transparent 1.5px);
   --dots-size: 22px 22px;
-  --dots-fade-dark:    linear-gradient(to bottom, transparent, var(--dark) 65%),    var(--dots) 0 0/var(--dots-size) var(--dark);
-  --dots-fade-surface: linear-gradient(to bottom, transparent, var(--surface) 65%), var(--dots) 0 0/var(--dots-size) var(--surface);
+  --dots-fade-dark: linear-gradient(to bottom, transparent, var(--dark) 65%), var(--dots) 0 0/var(--dots-size) var(--dark);
 
   --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
   --font-display: 'Barlow Condensed', 'Inter', sans-serif;

@@ -18,9 +18,11 @@
 
 /* ── SHOP LAYOUT ─────────────────────────────────────────── */
 
-/* Subtle full-page texture so the catalog isn't a flat black wall past the header band */
+/* Subtle accent glow at the top of the page instead of a flat black wall —
+   same treatment as the homepage categories section, no dot pattern */
 body.woo-page {
-  background: var(--dark) var(--dots) 0 0/var(--dots-size);
+  background: radial-gradient(ellipse 1100px 560px at 50% 0%, rgba(var(--accent-rgb), 0.06), transparent 70%) var(--dark);
+  background-attachment: fixed;
 }
 
 /* Full-width wrapper for all WooCommerce pages */
@@ -44,7 +46,7 @@ body.woo-page {
 }
 
 .woocommerce .woocommerce-products-header {
-  background: var(--dots-fade-surface);
+  background: var(--surface);
   border-bottom: 1px solid var(--border);
   padding: 56px 0 40px;
   text-align: center;
@@ -277,12 +279,13 @@ body.woo-page {
 .woocommerce ul.products li.product .product-card__image-wrap {
   aspect-ratio: 1;
   overflow: hidden;
-  background: var(--surface);
+  background: var(--white);
+  padding: 20px;
 }
 .woocommerce ul.products li.product .product-card__image-wrap img {
   width: 100% !important;
   height: 100% !important;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.5s var(--ease-out);
 }
 .woocommerce ul.products li.product:hover .product-card__image-wrap img { transform: scale(1.04); }
