@@ -64,7 +64,7 @@ body.woo-page {
   width: 75%;
   height: 70%;
   transform: translateX(-50%);
-  background: radial-gradient(ellipse at top, rgba(255,255,255,0.20), transparent 72%);
+  background: radial-gradient(ellipse at top, rgba(255,255,255,0.30), transparent 72%);
   pointer-events: none;
 }
 .woo-inner > h1.page-title::after {
@@ -79,10 +79,10 @@ body.woo-page {
     linear-gradient(var(--grid-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: var(--grid-size);
-  transform: perspective(380px) rotateX(62deg);
+  transform: perspective(500px) rotateX(50deg);
   transform-origin: bottom center;
-  -webkit-mask-image: linear-gradient(to top, black 0%, black 40%, transparent 92%);
-  mask-image: linear-gradient(to top, black 0%, black 40%, transparent 92%);
+  -webkit-mask-image: linear-gradient(to top, black 0%, black 55%, transparent 95%);
+  mask-image: linear-gradient(to top, black 0%, black 55%, transparent 95%);
   pointer-events: none;
 }
 

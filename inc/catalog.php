@@ -24,10 +24,10 @@ function scaff_catalog_category_order() {
         'gelbėjimo įranga',
         'įrankiai',
         'pirštinės',
-        'asmens apsaugos priemonės',
         'odiniai įrankių laikikliai ir diržai',
         'darbui su pastoliais',
-        'pvc kuprinės ir krepšiai',
+        'apsaugos priemonės',
+        'pvc kuprinės ir tašės',
     ]);
 }
 

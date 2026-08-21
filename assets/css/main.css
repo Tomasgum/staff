@@ -19,8 +19,8 @@
 
   /* 3D perspective grid-floor + spotlight glow — CSS approximation of a
      wireframe-room look (see .bg-gridfloor below), no stock photo needed. */
-  --grid-line: rgba(255,255,255,0.26);
-  --grid-size: 40px 40px;
+  --grid-line: rgba(255,255,255,0.4);
+  --grid-size: 44px 44px;
 
   --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
   --font-display: 'Barlow Condensed', 'Inter', sans-serif;
@@ -65,7 +65,7 @@ html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
   width: 75%;
   height: 70%;
   transform: translateX(-50%);
-  background: radial-gradient(ellipse at top, rgba(255,255,255,0.20), transparent 72%);
+  background: radial-gradient(ellipse at top, rgba(255,255,255,0.30), transparent 72%);
   pointer-events: none;
 }
 .bg-gridfloor::after,
@@ -82,10 +82,10 @@ html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
     linear-gradient(var(--grid-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: var(--grid-size);
-  transform: perspective(380px) rotateX(62deg);
+  transform: perspective(500px) rotateX(50deg);
   transform-origin: bottom center;
-  -webkit-mask-image: linear-gradient(to top, black 0%, black 40%, transparent 92%);
-  mask-image: linear-gradient(to top, black 0%, black 40%, transparent 92%);
+  -webkit-mask-image: linear-gradient(to top, black 0%, black 55%, transparent 95%);
+  mask-image: linear-gradient(to top, black 0%, black 55%, transparent 95%);
   pointer-events: none;
 }
 .categories-section > .container,
