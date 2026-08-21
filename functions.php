@@ -85,6 +85,18 @@ require_once SCAFF_DIR . '/inc/catalog.php';
 require_once SCAFF_DIR . '/inc/woocommerce-hooks.php';
 require_once SCAFF_DIR . '/inc/contact-form.php';
 
+// Outputs the optional uploaded background photo for a section (see
+// scaff_add_bg_settings() in inc/customizer.php) — a second layer behind the
+// section's own color/tint, with client-controlled opacity.
+function scaff_section_bg($prefix) {
+    $image = scaff_get("{$prefix}_bg_image");
+    if (!$image) return;
+    $opacity = (float) scaff_get("{$prefix}_bg_opacity", 0.35);
+    ?>
+    <div class="section-bg" style="background-image:url('<?php echo esc_url($image); ?>'); opacity:<?php echo esc_attr($opacity); ?>;"></div>
+    <?php
+}
+
 function scaff_get_icon($name) {
     $icons = [
         'truck'       => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',

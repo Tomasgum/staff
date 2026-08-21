@@ -132,9 +132,11 @@ function scaff_customizer_register($wp_customize) {
     scaff_add_setting($wp_customize, 'scaff_categories_eyebrow', 'Mūsų produktai', 'scaff_home_other', 'text');
     scaff_add_setting($wp_customize, 'scaff_categories_title', 'Kategorijos', 'scaff_home_other', 'text');
     scaff_add_setting($wp_customize, 'scaff_categories_subtitle', 'Raskite viską, ko reikia darbui aukštyje', 'scaff_home_other', 'text');
+    scaff_add_bg_settings($wp_customize, 'scaff_categories', 'scaff_home_other', 'Kategorijų sekcija');
 
     scaff_add_setting($wp_customize, 'scaff_products_eyebrow', 'Rekomenduojami', 'scaff_home_other', 'text');
     scaff_add_setting($wp_customize, 'scaff_products_title', 'Populiarūs produktai', 'scaff_home_other', 'text');
+    scaff_add_bg_settings($wp_customize, 'scaff_products', 'scaff_home_other', 'Produktų sekcija');
 
     scaff_add_setting($wp_customize, 'scaff_home_news_eyebrow', 'Naujienos', 'scaff_home_other', 'text');
     scaff_add_setting($wp_customize, 'scaff_home_news_title', 'Naujausi įrašai', 'scaff_home_other', 'text');
@@ -375,6 +377,37 @@ function scaff_add_setting($wp_customize, $id, $default, $section, $type = 'text
     } else {
         $wp_customize->add_control($id, $control_args);
     }
+}
+
+// Registers a background-image + opacity pair for a section (e.g. "scaff_categories"
+// -> scaff_categories_bg_image, scaff_categories_bg_opacity). The image sits as one
+// layer, the section's own dark background/overlay as the second, opacity-controlled
+// layer on top of it.
+function scaff_add_bg_settings($wp_customize, $prefix, $section, $label) {
+    $wp_customize->add_setting("{$prefix}_bg_image", [
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+        'transport'         => 'refresh',
+    ]);
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, "{$prefix}_bg_image", [
+        'label'   => "{$label} — fono nuotrauka",
+        'section' => $section,
+    ]));
+
+    $wp_customize->add_setting("{$prefix}_bg_opacity", [
+        'default'           => 0.35,
+        'sanitize_callback' => function ($value) {
+            return max(0, min(1, (float) $value));
+        },
+        'transport'         => 'refresh',
+    ]);
+    $wp_customize->add_control("{$prefix}_bg_opacity", [
+        'label'       => "{$label} — nuotraukos permatomumas",
+        'description' => 'Kuo didesnė reikšmė, tuo ryškesnė fono nuotrauka po tamsiu sluoksniu.',
+        'section'     => $section,
+        'type'        => 'range',
+        'input_attrs' => ['min' => 0, 'max' => 1, 'step' => 0.05],
+    ]);
 }
 
 function scaff_add_color_setting($wp_customize, $id, $default, $section, $label) {

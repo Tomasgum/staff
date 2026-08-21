@@ -97,6 +97,7 @@ if (class_exists('WooCommerce')) {
 ?>
 <?php if (!empty($categories) && !is_wp_error($categories)): ?>
 <section class="categories-section" id="categories">
+    <?php scaff_section_bg('scaff_categories'); ?>
     <div class="container">
         <div class="section-header" data-animate="fade-up">
             <span class="section-eyebrow"><?php echo esc_html(scaff_get('scaff_categories_eyebrow', 'Mūsų produktai')); ?></span>
@@ -158,6 +159,7 @@ if (class_exists('WooCommerce')) {
 ?>
 <?php if (!empty($featured_products)): ?>
 <section class="products-section" id="products">
+    <?php scaff_section_bg('scaff_products'); ?>
     <div class="container">
         <div class="section-header" data-animate="fade-up">
             <span class="section-eyebrow"><?php echo esc_html(scaff_get('scaff_products_eyebrow', 'Rekomenduojami')); ?></span>
