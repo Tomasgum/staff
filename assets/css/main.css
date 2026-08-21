@@ -66,6 +66,10 @@ html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
   background-size: cover;
   background-position: center;
 }
+/* Katalogas: photo covers the whole page, pinned so it doesn't scroll away */
+body.woo-page > .section-bg {
+  position: fixed;
+}
 .bg-gridfloor::before,
 .categories-section::before,
 .footer-main::before {

@@ -97,19 +97,13 @@ function scaff_section_bg($prefix) {
     <?php
 }
 
-// Same background-photo + opacity settings, but as CSS custom properties for
-// an element (like the catalog page's <h1>) that already uses its own ::after
-// for this rather than a separate .section-bg div.
-function scaff_section_bg_style_attr($prefix) {
-    $image = scaff_get("{$prefix}_bg_image");
-    if (!$image) return '';
-    $opacity = (float) scaff_get("{$prefix}_bg_opacity", 0.35);
-    return sprintf(
-        ' style="--section-photo:url(%s); --section-photo-opacity:%s;"',
-        esc_url($image),
-        esc_attr($opacity)
-    );
-}
+// Katalogas background photo covers the whole page (fixed, so it doesn't
+// scroll away), not just the heading band.
+add_action('wp_body_open', function () {
+    if (is_woocommerce() || is_cart() || is_checkout()) {
+        scaff_section_bg('scaff_katalogas');
+    }
+});
 
 function scaff_get_icon($name) {
     $icons = [
