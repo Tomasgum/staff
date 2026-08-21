@@ -13,7 +13,10 @@ $featured_partners = [];
 for ($i = 1; $i <= 3; $i++) {
     $photo = scaff_get("scaff_partner_featured_{$i}_photo");
     $name  = scaff_get("scaff_partner_featured_{$i}_name");
-    if ($photo || $name) {
+    // Only a genuine named representative belongs in the featured spotlight —
+    // a lone logo with no name just belongs in the plain grid below, so a
+    // single half-filled entry doesn't look like "we only have one partner".
+    if ($name) {
         $featured_partners[] = [
             'photo' => $photo,
             'name'  => $name,

@@ -88,13 +88,10 @@ if (class_exists('WooCommerce')) {
             'orderby'  => 'include',
         ]);
     } else {
-        $categories = get_terms([
-            'taxonomy'   => 'product_cat',
-            'hide_empty' => true,
-            'parent'     => 0,
-            'number'     => 8,
-            'exclude'    => [get_option('default_product_cat')],
-        ]);
+        // Same source/order as the catalog page, and no arbitrary cap —
+        // a fixed "8" here silently dropped categories once the client
+        // consolidated down to a clean set of product groups.
+        $categories = scaff_get_catalog_categories(0);
     }
 }
 ?>
@@ -124,10 +121,6 @@ if (class_exists('WooCommerce')) {
                     <?php endif; ?>
                     <div class="category-card__overlay"></div>
                 </div>
-                <span class="category-card__badge">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-                    Kategorija
-                </span>
                 <div class="category-card__content">
                     <h3 class="category-card__title"><?php echo esc_html($cat->name); ?></h3>
                     <span class="category-card__count"><?php echo $cat->count; ?> produktų</span>
@@ -180,10 +173,6 @@ if (class_exists('WooCommerce')) {
             <div class="product-card" data-animate="card" data-index="<?php echo $idx; ?>">
                 <a href="<?php echo esc_url(get_permalink($product->get_id())); ?>" class="product-card__image-link">
                     <div class="product-card__image-wrap">
-                        <span class="product-card__badge">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41L11 3.83V3H3v8h.83l9.58 9.59a2 2 0 002.83 0l4.35-4.35a2 2 0 000-2.83z"/><circle cx="6.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
-                            Produktas
-                        </span>
                         <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($product->get_name()); ?>" loading="lazy">
                     </div>
                 </a>

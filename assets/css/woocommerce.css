@@ -18,10 +18,14 @@
 
 /* ── SHOP LAYOUT ─────────────────────────────────────────── */
 
-/* Subtle accent glow at the top of the page instead of a flat black wall —
-   same treatment as the homepage categories section, no dot pattern */
+/* Same grid-line texture as the homepage's dark sections, fixed so it
+   doesn't just scroll away after the first screen of a long product list */
 body.woo-page {
-  background: radial-gradient(ellipse 1100px 560px at 50% 0%, rgba(var(--accent-rgb), 0.06), transparent 70%) var(--dark);
+  background-color: var(--dark);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: var(--grid-size);
   background-attachment: fixed;
 }
 
@@ -46,7 +50,11 @@ body.woo-page {
 }
 
 .woocommerce .woocommerce-products-header {
-  background: var(--surface);
+  background-color: var(--surface);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: var(--grid-size);
   border-bottom: 1px solid var(--border);
   padding: 56px 0 40px;
   text-align: center;

@@ -17,12 +17,11 @@
   --text-subtle:  #555;
   --white:        #ffffff;
 
-  /* Dot-grid texture — breaks up large flat-black areas, blueprint/technical feel.
-     Faded top-to-bottom via a gradient mask instead of a flat repeating tile,
-     so it reads as an intentional accent rather than uniform wallpaper. */
-  --dots: radial-gradient(rgba(255,255,255,0.16) 1.5px, transparent 1.5px);
-  --dots-size: 22px 22px;
-  --dots-fade-dark: linear-gradient(to bottom, transparent, var(--dark) 65%), var(--dots) 0 0/var(--dots-size) var(--dark);
+  /* Technical grid-line texture — clearly visible blueprint/engineering feel,
+     applied as background-image on top of each section's own background-color
+     (see .bg-grid below) so it never gets clobbered by a `background` shorthand. */
+  --grid-line: rgba(255,255,255,0.09);
+  --grid-size: 42px 42px;
 
   --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
   --font-display: 'Barlow Condensed', 'Inter', sans-serif;
@@ -44,6 +43,17 @@
 /* ── RESET ───────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+/* Shared grid-line texture for the large dark sections — each selector still
+   sets its own background-color, this only layers the pattern on top. */
+.hero,
+.footer-main,
+.categories-section {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: var(--grid-size);
+}
 body {
   font-family: var(--font-sans);
   font-size: 16px;
@@ -564,7 +574,7 @@ h4 { font-size: 1.1rem; }
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: var(--dots-fade-dark);
+  background-color: var(--dark);
 }
 .hero__bg {
   position: absolute;
@@ -833,7 +843,7 @@ h4 { font-size: 1.1rem; }
 /* ── CATEGORIES ──────────────────────────────────────────── */
 .categories-section {
   padding: 100px 0;
-  background: radial-gradient(ellipse 1000px 520px at 50% -10%, rgba(var(--accent-rgb), 0.07), transparent 70%), var(--dark);
+  background-color: var(--dark);
 }
 .categories-grid {
   display: grid;
@@ -921,26 +931,6 @@ h4 { font-size: 1.1rem; }
   transition: opacity 0.3s, transform 0.3s var(--ease-out);
 }
 .category-card:hover .category-card__arrow { opacity: 1; transform: scale(1); }
-.category-card__badge {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px 11px;
-  border-radius: 20px;
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(255,255,255,0.25);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--white);
-}
 
 /* ── PRODUCTS SECTION ────────────────────────────────────── */
 .products-section {
@@ -1000,24 +990,6 @@ h4 { font-size: 1.1rem; }
   transition: transform 0.5s var(--ease-out);
 }
 .product-card:hover .product-card__image-wrap img { transform: scale(1.06); }
-.product-card__badge {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px 11px;
-  border-radius: 20px;
-  background: var(--dark);
-  border: 1px solid var(--border-light);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
 .product-card__body {
   padding: 18px;
   display: flex;
@@ -1441,7 +1413,7 @@ a.partner-featured-card:hover {
 
 /* ── FOOTER ──────────────────────────────────────────────── */
 .footer-main {
-  background: var(--dots-fade-dark);
+  background-color: var(--dark);
   padding: 72px 0 48px;
   border-top: 1px solid var(--border);
 }

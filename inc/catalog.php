@@ -14,22 +14,48 @@ function scaff_catalog_excluded_slugs() {
     ]);
 }
 
+// Client-specified display order for the main product groups (by name, not slug,
+// since these were renamed/consolidated directly in wp-admin). Anything not in
+// this list falls back after it, in whatever order WordPress returns it.
+function scaff_catalog_category_order() {
+    return apply_filters('scaff_catalog_category_order', [
+        'apraišai',
+        'kritimo sulaikymo įranga',
+        'gelbėjimo įranga',
+        'įrankiai',
+        'pirštinės',
+        'asmens apsaugos priemonės',
+        'odiniai įrankių laikikliai ir diržai',
+        'darbui su pastoliais',
+        'pvc kuprinės ir krepšiai',
+    ]);
+}
+
 function scaff_get_catalog_categories($parent_id = 0) {
     $terms = get_terms([
         'taxonomy'   => 'product_cat',
         'hide_empty' => true,
         'parent'     => $parent_id,
-        'orderby'    => 'menu_order',
-        'order'      => 'ASC',
         'exclude'    => [(int) get_option('default_product_cat')],
     ]);
 
     if (empty($terms) || is_wp_error($terms)) return [];
 
     $excluded = scaff_catalog_excluded_slugs();
-    return array_values(array_filter($terms, function($term) use ($excluded) {
+    $terms = array_values(array_filter($terms, function($term) use ($excluded) {
         return !in_array($term->slug, $excluded, true);
     }));
+
+    $order = scaff_catalog_category_order();
+    usort($terms, function($a, $b) use ($order) {
+        $posA = array_search(mb_strtolower($a->name), $order, true);
+        $posB = array_search(mb_strtolower($b->name), $order, true);
+        if ($posA === false) $posA = count($order) + $a->term_id;
+        if ($posB === false) $posB = count($order) + $b->term_id;
+        return $posA <=> $posB;
+    });
+
+    return $terms;
 }
 
 function scaff_category_icon($term) {
