@@ -393,19 +393,21 @@ function scaff_add_color_setting($wp_customize, $id, $default, $section, $label)
 // this used to always print all three with stale hardcoded defaults, which
 // silently fought every design-token change made directly in main.css.
 function scaff_customizer_css() {
+    $mods = get_theme_mods();
+    if (!is_array($mods)) $mods = [];
     $lines = [];
 
-    if (has_theme_mod('scaff_color_accent')) {
-        $accent = get_theme_mod('scaff_color_accent');
+    if (array_key_exists('scaff_color_accent', $mods)) {
+        $accent = $mods['scaff_color_accent'];
         list($r, $g, $b) = sscanf($accent, '#%02x%02x%02x');
         $lines[] = "--accent: {$accent};";
         $lines[] = "--accent-rgb: {$r}, {$g}, {$b};";
     }
-    if (has_theme_mod('scaff_color_dark')) {
-        $lines[] = '--dark: ' . get_theme_mod('scaff_color_dark') . ';';
+    if (array_key_exists('scaff_color_dark', $mods)) {
+        $lines[] = '--dark: ' . $mods['scaff_color_dark'] . ';';
     }
-    if (has_theme_mod('scaff_color_surface')) {
-        $lines[] = '--surface: ' . get_theme_mod('scaff_color_surface') . ';';
+    if (array_key_exists('scaff_color_surface', $mods)) {
+        $lines[] = '--surface: ' . $mods['scaff_color_surface'] . ';';
     }
 
     if (empty($lines)) return;
