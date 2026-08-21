@@ -18,6 +18,11 @@
 
 /* ── SHOP LAYOUT ─────────────────────────────────────────── */
 
+/* Subtle full-page texture so the catalog isn't a flat black wall past the header band */
+body.woo-page {
+  background: var(--dark) var(--dots) 0 0/var(--dots-size);
+}
+
 /* Full-width wrapper for all WooCommerce pages */
 .woo-page-wrap {
   max-width: 1280px;
@@ -52,84 +57,44 @@
   color: var(--white);
 }
 
-/* ── CATEGORY TAB BAR ────────────────────────────────────── */
+/* ── CATEGORY TAB BAR ────────────────────────────────────────
+   Wraps into as many rows as needed instead of forcing horizontal
+   sliding through a single-line strip. */
 .shop-cats-wrap {
-  position: relative;
   margin-bottom: 28px;
 }
+
+/* Scroll-arrows and edge fades are no longer part of the layout */
+.shop-cats-arrow,
 .shop-cats-wrap::before,
 .shop-cats-wrap::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 1px;
-  width: 60px;
-  pointer-events: none;
-  z-index: 2;
-  transition: opacity 0.2s;
+  display: none;
 }
-.shop-cats-wrap::before {
-  left: 40px;
-  background: linear-gradient(to right, var(--dark), transparent);
-  opacity: 0;
-}
-.shop-cats-wrap::after {
-  right: 40px;
-  background: linear-gradient(to left, var(--dark), transparent);
-}
-.shop-cats-wrap.can-scroll-left::before  { opacity: 1; }
-.shop-cats-wrap.can-scroll-right::after  { opacity: 1; }
-.shop-cats-wrap:not(.can-scroll-right)::after { opacity: 0; }
-
-.shop-cats-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-60%);
-  z-index: 3;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s;
-  padding: 0;
-}
-.shop-cats-arrow:hover { border-color: var(--accent); color: var(--accent); }
-.shop-cats-arrow--prev { left: 0; }
-.shop-cats-arrow--next { right: 0; }
-.shop-cats-arrow[disabled] { opacity: 0.25; pointer-events: none; }
 
 .shop-cats {
   display: flex;
-  align-items: center;
-  border-bottom: 1px solid var(--border);
-  overflow-x: auto;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-  padding: 0 44px;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
+  border-bottom: none;
 }
-.shop-cats::-webkit-scrollbar { display: none; }
 .shop-cats__tab {
   flex-shrink: 0;
-  padding: 12px 20px;
-  font-size: 0.875rem;
+  padding: 9px 18px;
+  font-size: 0.85rem;
   font-weight: 500;
   color: var(--text-muted);
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
   white-space: nowrap;
-  transition: color 0.2s, border-color 0.2s;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
 }
-.shop-cats__tab:hover { color: var(--white); }
+.shop-cats__tab:hover { color: var(--white); border-color: var(--border-light); }
 .shop-cats__tab.is-active {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
+  color: var(--white);
+  background: var(--accent);
+  border-color: var(--accent);
   font-weight: 600;
 }
 
