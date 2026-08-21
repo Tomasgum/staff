@@ -277,6 +277,14 @@ function scaff_customizer_register($wp_customize) {
     scaff_add_setting($wp_customize, 'scaff_footer_tagline', 'Pastolių įrankiai ir darbo aukštyje įranga profesionalams.', 'scaff_footer', 'textarea');
     scaff_add_setting($wp_customize, 'scaff_footer_copyright', '© 2024 ScaffShop. Visos teisės saugomos.', 'scaff_footer', 'text');
 
+    // ── KATALOGAS (shop archive header) ────────────────────────────────────────
+    $wp_customize->add_section('scaff_katalogas', [
+        'title'    => __('Katalogas', 'scaff'),
+        'priority' => 21.5,
+    ]);
+
+    scaff_add_bg_settings($wp_customize, 'scaff_katalogas', 'scaff_katalogas', 'Katalogo antraštė');
+
     // ── COLORS ───────────────────────────────────────────────────────────────
     $wp_customize->add_section('scaff_colors', [
         'title'    => __('Theme Colors', 'scaff'),

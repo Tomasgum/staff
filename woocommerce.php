@@ -13,7 +13,7 @@
     if (is_shop() && !is_product_category() && !is_product_tag() && !$scaff_show_all) {
 
         if (apply_filters('woocommerce_show_page_title', true)) {
-            echo '<h1 class="page-title">';
+            echo '<h1 class="page-title"' . scaff_section_bg_style_attr('scaff_katalogas') . '>';
             woocommerce_page_title();
             echo '</h1>';
         }
@@ -39,7 +39,7 @@
     } elseif (is_product_category()) {
 
         if (apply_filters('woocommerce_show_page_title', true)) {
-            echo '<h1 class="page-title">';
+            echo '<h1 class="page-title"' . scaff_section_bg_style_attr('scaff_katalogas') . '>';
             woocommerce_page_title();
             echo '</h1>';
         }

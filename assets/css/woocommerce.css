@@ -67,6 +67,19 @@ body.woo-page {
   background: radial-gradient(ellipse at top, rgba(255,255,255,0.30), transparent 72%);
   pointer-events: none;
 }
+/* Optional uploaded background photo (Customizer -> Katalogas), set via
+   --section-photo/--section-photo-opacity inline on the <h1> itself */
+.woo-inner > h1.page-title::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: var(--section-photo, none);
+  background-size: cover;
+  background-position: center;
+  opacity: var(--section-photo-opacity, 1);
+  pointer-events: none;
+}
 
 /* ── CATEGORY TAB BAR ────────────────────────────────────────
    Wraps into as many rows as needed instead of forcing horizontal

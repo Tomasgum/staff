@@ -97,6 +97,20 @@ function scaff_section_bg($prefix) {
     <?php
 }
 
+// Same background-photo + opacity settings, but as CSS custom properties for
+// an element (like the catalog page's <h1>) that already uses its own ::after
+// for this rather than a separate .section-bg div.
+function scaff_section_bg_style_attr($prefix) {
+    $image = scaff_get("{$prefix}_bg_image");
+    if (!$image) return '';
+    $opacity = (float) scaff_get("{$prefix}_bg_opacity", 0.35);
+    return sprintf(
+        ' style="--section-photo:url(%s); --section-photo-opacity:%s;"',
+        esc_url($image),
+        esc_attr($opacity)
+    );
+}
+
 function scaff_get_icon($name) {
     $icons = [
         'truck'       => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',
